@@ -1,10 +1,10 @@
 import React from 'react'
-import { Content } from './containers/ContentContainer'
+import  ContentContainer from './containers/ContentContainer'
 
 const App = (): JSX.Element => {
   return (
     <div className='app'>
-      <Content />
+      <ContentContainer />
     </div>
   )
 }

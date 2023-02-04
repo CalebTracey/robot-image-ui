@@ -1,5 +1,8 @@
 import axios, { AxiosError, AxiosResponse, isAxiosError } from 'axios'
 
+/**
+ * * Service - handles the external source calls
+ */
 
 const LOCAL_URL = 'http://localhost:8080/v1/image'
 const LOCAL_TEST = 'http://localhost:8080/v1/test'
