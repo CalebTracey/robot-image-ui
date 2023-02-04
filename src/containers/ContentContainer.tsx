@@ -13,13 +13,13 @@ const defaultSize = '1024x1024'
 const defaultCount = 1
 const tenSeconds = 10000
 
-const testAlert: AlertT = { type: 'success', message: 'success message!' }
+// const testAlert: AlertT = { type: 'success', message: 'success message!' }
 
 export const ContentContainer = (): JSX.Element => {
   const [prompt, setPrompt] = useState<string>('')
   const [result, setResult] = useState<ResultI | undefined>(undefined)
   const [isLoading, setIsLoading] = useState<boolean>(false)
-  const [alert, setAlert] = useState<AlertT | undefined>(testAlert)
+  const [alert, setAlert] = useState<AlertT | undefined>(undefined)
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -29,14 +29,13 @@ export const ContentContainer = (): JSX.Element => {
     return () => clearTimeout(timer)
   }, [alert])
 
-
   /**
    * * handleSubmit
-   * Makes the source call and handles the result when the user submits 
+   * Makes the source call and handles the result when the user submits
    * an image generation request.
    * ? is using Context API a better way to manage state
    * ? would that allow us to not prop drill this function
-   * 
+   *
    * @param e the event object from submitting the form
    * @returns void
    */
