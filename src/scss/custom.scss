@@ -2,33 +2,6 @@
 
 @use "./colors.scss";
 
-// $filter-color: #004daa;
-// $text-color: #e8e6e3;
-
-// $beige-color: #e3e7d3;
-// $spanish-grey-color: #989c94;
-// //BDC2BF - nice grey
-
-// $text-color-dark: rgba($text-color, 0.9);
-
-// $primary-color: #181a1b;
-// $secondary-color: rgba(white, 0.025);
-
-// $background-gradient: linear-gradient(rgba(0, 0, 0, 1), rgba(0, 0, 0, 1));
-
-// $background-color: rgba($primary-color, 0.95);
-// $secondary-background-color: rgba($secondary-color, 0.05);
-// $secondary-background-color-light: rgba($secondary-color, 0.075);
-
-// $border-color-light: rgba(white, 0.2);
-// $border-color-dark: rgba(white, 0.075);
-
-// $border-light: 1px solid $border-color-light;
-// $border-dark: 1px solid $border-color-dark;
-
-// // $header-font-color: rgba($text-color, 0.75);
-// $header-font-color: #acc3a6;
-
 $border-light: 1px solid colors.$border-color-light;
 $border-dark: 1px solid colors.$border-color-dark;
 
@@ -57,19 +30,18 @@ $border-dark: 1px solid colors.$border-color-dark;
 
 * {
   box-sizing: border-box;
-
 }
 
 html {
   height: 100%;
-  background: colors.$background-gradient;
-
+  
 }
 
 body {
   color: colors.$text-color;
   letter-spacing: 0.5px;
   min-height: 100%;
+  background-color: colors.$background-color
 }
 
 header {
@@ -96,7 +68,6 @@ img {
 .app {
   @extend %max-size;
   position: fixed;
-  background-color: colors.$background-color;
 }
 
 .content {
@@ -268,12 +239,12 @@ img {
   max-height: 100vh;
 }
 
-@media only screen and (hover: none) and (pointer: coarse){
+@media only screen and (hover: none) and (pointer: coarse) {
   .grid-half__input {
     grid-column: 1 / 6;
   }
 
   header {
-    font-size: .75rem;
+    font-size: 0.75rem;
   }
-  }
+}
