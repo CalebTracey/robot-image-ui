@@ -1,8 +1,5 @@
-import axios, { AxiosError, AxiosResponse, isAxiosError } from 'axios'
+import axios, { AxiosError, AxiosHeaders, AxiosRequestConfig, AxiosResponse, isAxiosError } from 'axios'
 
-/**
- * * Service - handles the external source calls
- */
 
 const LOCAL_URL = 'http://localhost:8080/v1/image'
 const LOCAL_TEST = 'http://localhost:8080/v1/test'
@@ -33,7 +30,7 @@ const Post = async (props: Props): Promise<ResponseI> => {
   
   return axios
     // set url here for now
-    .post(URL_DEV, request)
+    .post(LOCAL_URL, request)
     .then((res: AxiosResponse<ResponseI>) => {
       if (res && res.data) {
         return res.data
