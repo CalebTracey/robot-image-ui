@@ -7,6 +7,7 @@ export default defineConfig(({command, mode }) => {
 
   return {
     // vite config
+    base: '/robot-image-ui/',
     plugins: [react()],
   }
   // publicPath: process.env.NODE_ENV === 'production' ? '/robot-image-ui/' : '/'
