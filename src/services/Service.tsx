@@ -1,4 +1,4 @@
-import axios, { AxiosError, AxiosHeaders, AxiosRequestConfig, AxiosResponse, isAxiosError } from 'axios'
+import axios, { AxiosError, AxiosResponse, isAxiosError } from 'axios'
 
 
 const LOCAL_URL = 'http://localhost:8080/v1/image'
