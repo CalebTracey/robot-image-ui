@@ -7,17 +7,12 @@ export default defineConfig(({command, mode }) => {
 
   return {
     // vite config
-    define: {
-      APP_ENV: env.API_KEY,
-      publicPath: process.env.NODE_ENV === 'github-pages' ? 
-      ('/robot-image-ui/') : ( '/')
-    },
+    plugins: [react()],
   }
-  // plugins: [react()],
   // publicPath: process.env.NODE_ENV === 'production' ? '/robot-image-ui/' : '/'
 })
 
-// module.exports = {  
+// module.exports = {
 //   config,
 //   publicPath: process.env.NODE_ENV === 'production' ? '/robot-image-ui/' : '/'
 // };
