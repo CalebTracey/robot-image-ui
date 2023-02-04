@@ -2,7 +2,7 @@ import React from 'react'
 import { Alert } from 'react-bootstrap'
 import HeaderText from './HeaderText'
 
-const PageTitle = 'robot picture maker'
+const PageTitle = 'AI image factory'
 interface Props {
   alert: AlertT | undefined
 }
