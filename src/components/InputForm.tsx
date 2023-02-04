@@ -4,6 +4,7 @@ import React, {
   Dispatch,
   FormEvent,
   useState,
+  useEffect,
 } from 'react'
 import { Form, InputGroup } from 'react-bootstrap'
 import ContentButtonContainer from '../containers/ContentButtonContainer'
@@ -24,7 +25,11 @@ interface Props {
   setResult: Dispatch<SetStateAction<ResultI | undefined>>
 }
 
-export const InputForm = (props: Props): JSX.Element => {
+const defaultLabel = 'what would you like to see?'
+const resultLabel = 'scroll down to see you results'
+const focusLabel = 'type here'
+
+const InputForm = (props: Props): JSX.Element => {
   const {
     respCount,
     setRespCount,
@@ -37,9 +42,20 @@ export const InputForm = (props: Props): JSX.Element => {
     setResult,
   } = props
 
-  const defaultLabel = 'what would you like to see?'
-  const focusLabel = 'type here'
   const [label, setLabel] = useState(defaultLabel)
+  const [inputDisabled, setInputDisabled] = useState(false)
+
+  useEffect(() => {
+    if (respCount > 0 || isLoading) {
+      if (respCount > 0) {
+        setLabel(resultLabel)
+      }
+      setInputDisabled(true)
+    } else {
+      setInputDisabled(false)
+      setLabel(defaultLabel)
+    }
+  }, [respCount, isLoading])
 
   const handleOnChange = (
     e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
@@ -59,14 +75,16 @@ export const InputForm = (props: Props): JSX.Element => {
           controlId='floatingInput'
           label={label}
           className='floating-label'
-          onBlur={() => setLabel(defaultLabel)}
-          onFocus={() => setLabel(focusLabel)}
+          // onBlur={() => setLabel(defaultLabel)}
+          // onFocus={() => setLabel(focusLabel)}
         >
           <Form.Control
             onChange={handleOnChange}
             as='input'
             type='text'
             name='prompt'
+            disabled={inputDisabled}
+            readOnly={inputDisabled}
             placeholder={placeholder}
           />
         </Form.FloatingLabel>
@@ -89,3 +107,5 @@ export const InputForm = (props: Props): JSX.Element => {
     </Form>
   )
 }
+
+export default InputForm

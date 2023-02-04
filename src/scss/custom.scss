@@ -184,6 +184,14 @@ img {
     border-right: 0;
     background-color: colors.$secondary-background-color-light;
   }
+
+  &:disabled {
+    @extend %border-style;
+    border: $border-light;
+    color: colors.$text-color;
+    border-right: 0;
+    background-color: colors.$secondary-background-color;
+  }
 }
 
 .form-button {
