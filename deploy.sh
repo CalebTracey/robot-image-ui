@@ -1,4 +1,5 @@
 #! /usr/bin/env sh
+# /usr/bin/env sh /Users/calebtracey/Code/robot-image-ui/deploy.sh
 
 # abort on errors
 set -e
@@ -7,7 +8,7 @@ set -e
 yarn run build
 
 # navigate into the build output directory
-cd dist
+cd /Users/calebtracey/Code/robot-image-ui/dist
 
 # place .nojekyll to bypass Jekyll processing
 echo > .nojekyll
