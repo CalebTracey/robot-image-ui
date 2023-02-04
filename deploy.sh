@@ -1,4 +1,4 @@
-#!/usr/bin/env sh
+# /usr/bin/env sh
 
 # abort on errors
 set -e
@@ -16,7 +16,7 @@ echo > .nojekyll
 # echo 'www.example.com' > CNAME
 
 git init
-git checkout -B main
+git checkout -B develop
 git add -A
 git commit -m 'deploy'
 
@@ -24,6 +24,6 @@ git commit -m 'deploy'
 # git push -f git@github.com:<USERNAME>/<USERNAME>.github.io.git main
 
 # if you are deploying to https://<USERNAME>.github.io/<REPO>
-git push -f git@github.com:CalebTracey/robot-image-ui.git main:gh-pages
+git push -f git@github.com:CalebTracey/robot-image-ui.git develop:gh-pages
 
 cd -
