@@ -33,7 +33,7 @@ const Post = async (props: Props): Promise<ResponseI> => {
   
   return axios
     // set url here for now
-    .post(LOCAL_URL, request)
+    .post(URL_DEV, request)
     .then((res: AxiosResponse<ResponseI>) => {
       if (res && res.data) {
         return res.data
