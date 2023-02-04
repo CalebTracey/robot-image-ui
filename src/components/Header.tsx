@@ -18,7 +18,7 @@ const Header = (props: Props): JSX.Element => {
         {alert ? (
           <Alert
             className='header-alert'
-            show={alert ? true : false}
+            show={!!alert}
             variant={alert?.type}
           >
             <span>{alert?.message}</span>
