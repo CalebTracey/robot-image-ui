@@ -6,7 +6,7 @@ import { ErrorFallback } from '../components/ErrorFallback'
 import ResultsContainer from './ResultsContainer'
 import FaceContainer from './FaceContainer'
 import HeaderContainer from './HeaderContainer'
-import { InputForm } from '../components/InputForm'
+import InputForm from '../components/InputForm'
 
 const placeholder = 'Two bears fighting aliens with light sabers'
 const defaultSize = '1024x1024'
