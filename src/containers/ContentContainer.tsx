@@ -20,6 +20,7 @@ export const ContentContainer = (): JSX.Element => {
   const [result, setResult] = useState<ResultI | undefined>(undefined)
   const [isLoading, setIsLoading] = useState<boolean>(false)
   const [alert, setAlert] = useState<AlertT | undefined>(undefined)
+  const [respCount, setRespCount] = useState(0)
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -64,7 +65,6 @@ export const ContentContainer = (): JSX.Element => {
 
     return e.currentTarget.reset()
   }
-  const [respCount, setRespCount] = useState(0)
 
   useEffect(() => {
     if (result && result?.data) {
@@ -97,7 +97,12 @@ export const ContentContainer = (): JSX.Element => {
         </div>
       </ErrorBoundary>
       {result ? (
-        <ResultsContainer isLoading={isLoading} result={result} />
+        <ResultsContainer
+          respCount={respCount}
+          isLoading={isLoading}
+          result={result}
+          prompt={prompt}
+        />
       ) : null}
     </div>
   )

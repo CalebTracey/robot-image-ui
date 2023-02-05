@@ -1,4 +1,5 @@
 import axios, { AxiosError, AxiosResponse, isAxiosError } from 'axios'
+import Mapper from './Mapper'
 
 const LOCAL_URL = 'http://localhost:8080/v1/image'
 const LOCAL_TEST = 'http://localhost:8080/v1/test'
@@ -43,24 +44,7 @@ const Post = async (props: Props): Promise<ResponseI> => {
           console.error(err)
         }
 
-        return {
-          result: { created: 0, data: [] },
-          message: {
-            errorLog: [
-              {
-                scope: 'Service',
-                statusCode: err?.code !== undefined ? err.code : '500',
-                rootCause:
-                  err?.cause?.message !== undefined
-                    ? err.cause.message
-                    : 'Post request failed',
-                trace: 'Post: ',
-              },
-            ],
-            status: 'ERROR',
-            count: '0',
-          },
-        }
+        return Mapper.errorResponse(err)
       })
   )
 }
