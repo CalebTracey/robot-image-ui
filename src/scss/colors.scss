@@ -1,26 +1,33 @@
+// neutral color: 60%
+$neutral-color: #dddddd;
+// primary color: 30%
+$primary-color: rgba(#222831, 1);
+// $primary-color: rgba(#226CE0, .95);
+// contrast color: 10%
+$contrast-color: #f05454;
 
+$secondary-color: #30475e;
 
-$filter-color: #004daa;
+// $filter-color: #004daa;
 $text-color: #e8e6e3;
 
 $beige-color: #e3e7d3;
-$spanish-grey-color: #989c94;
-//BDC2BF - nice grey
+$border-grey: #989c94;
+// $border-grey: #BDC2BF;
 
 $text-color-dark: rgba($text-color, 0.9);
 
-$primary-color: #181a1b;
-$secondary-color: rgba(white, 0.025);
+// $primary-color: #181a1b;
+// $secondary-color: rgba(white, 0.025);
 
 $background-gradient: linear-gradient(rgba(0, 0, 0, 1), rgba(0, 0, 0, 1));
 
-$background-color: rgba($primary-color, 0.95);
+// $background-color: rgba($primary-color, 0.95);
 $secondary-background-color: rgba($secondary-color, 0.05);
 $secondary-background-color-light: rgba($secondary-color, 0.075);
 
-$border-color-light: rgba(white, 0.2);
-$border-color-dark: rgba(white, 0.075);
-
+$border-color-light: rgba($secondary-color, 0.5);
+$border-color-dark: rgba($secondary-color, 75);
 
 // $header-font-color: rgba($text-color, 0.75);
 $header-font-color: #acc3a6;

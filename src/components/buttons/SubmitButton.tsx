@@ -1,6 +1,6 @@
 import { Button } from 'react-bootstrap'
 import { GrowSpinner } from '../GrowSpinner'
-
+import { BsArrowRight } from 'react-icons/bs'
 interface Props {
   isLoading: boolean
 }
@@ -11,11 +11,11 @@ const SubmitButton = (props: Props): JSX.Element => {
   return (
     <Button
       className='form-button'
-      variant='outline-primary'
+      // variant='primary'
       type='submit'
       disabled={isLoading}
     >
-      {isLoading ? <GrowSpinner /> : <span>submit</span>}
+      {isLoading ? <GrowSpinner /> : <BsArrowRight />}
     </Button>
   )
 }

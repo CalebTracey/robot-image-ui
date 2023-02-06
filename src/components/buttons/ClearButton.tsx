@@ -7,7 +7,7 @@ interface Props {
 const ClearButton = (props: Props): JSX.Element => {
   const { clearHandler } = props
   return (
-    <Button onClick={clearHandler} className='form-button' variant='dark'>
+    <Button onClick={clearHandler} className='form-button' type='button'>
       <span>
         <BsXCircle />
       </span>

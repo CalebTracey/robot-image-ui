@@ -12,7 +12,7 @@ const ScrollResultButton = (props: {
   return respCount > 0 ? (
     <Button
       className='scroll-button'
-      variant='dark'
+      type='button'
       onClick={(e) => Handler.ScrollToId(e, resultsContainerId)}
     >
       <BsCaretDownFill />

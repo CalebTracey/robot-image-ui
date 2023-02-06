@@ -9,18 +9,20 @@ import React, {
 import { Form, InputGroup } from 'react-bootstrap'
 import ContentButtonContainer from '../containers/ContentButtonContainer'
 import Handler from '../services/Handler'
-import ScrollResultButton from './buttons/ScrollResultButton'
 import SubmitButton from './buttons/SubmitButton'
 
 interface Props {
+  isLoading: boolean
+
+  prompt: string
+  placeholder: string
   result: ResultI | undefined
   respCount: number
-  setRespCount: Dispatch<SetStateAction<number>>
-  isLoading: boolean
-  prompt: string
-  setPrompt: (str: string) => void
-  placeholder: string
+
   handleSubmit: (e: FormEvent<HTMLFormElement>) => void
+
+  setRespCount: Dispatch<SetStateAction<number>>
+  setPrompt: (str: string) => void
   setIsLoading: Dispatch<SetStateAction<boolean>>
   setResult: Dispatch<SetStateAction<ResultI | undefined>>
 }
@@ -63,18 +65,17 @@ const InputForm = (props: Props): JSX.Element => {
     // throttle setState with timeout
     const timer = setTimeout(() => {
       setPrompt(e.target.value)
-    }, 1000)
+    }, 500)
 
     return () => clearTimeout(timer)
   }
 
   return (
-    <Form className='form-input-container' onSubmit={handleSubmit}>
+    <Form className='input-form' onSubmit={handleSubmit}>
       <InputGroup>
         <Form.FloatingLabel
           controlId='floatingInput'
           label={label}
-          className='floating-label'
           // onBlur={() => setLabel(defaultLabel)}
           // onFocus={() => setLabel(focusLabel)}
         >
@@ -103,7 +104,6 @@ const InputForm = (props: Props): JSX.Element => {
           result={result}
         />
       </InputGroup>
-      <ScrollResultButton respCount={respCount} />
     </Form>
   )
 }

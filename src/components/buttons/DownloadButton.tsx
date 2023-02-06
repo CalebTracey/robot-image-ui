@@ -8,7 +8,7 @@ interface Props {
 const DownloadButton = (props: Props): JSX.Element => {
   const { result } = props
   return (
-    <Button className='form-button' variant='dark'>
+    <Button className='form-button' type='button'>
       <BsDownload />
     </Button>
   )

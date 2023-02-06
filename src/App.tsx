@@ -1,10 +1,15 @@
-import React from 'react'
-import  ContentContainer from './containers/ContentContainer'
+import React, { useState } from 'react'
+import ContentContainer from './containers/ContentContainer'
 
 const App = (): JSX.Element => {
+  const [initializing, setInitializing] = useState(true)
+
   return (
     <div className='app'>
-      <ContentContainer />
+      <ContentContainer
+        initializing={initializing}
+        setInitializing={setInitializing}
+      />
     </div>
   )
 }
