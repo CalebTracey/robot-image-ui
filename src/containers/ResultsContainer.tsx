@@ -1,7 +1,9 @@
 import React from 'react'
 import { ImageList } from '../components/ImageList'
+import Results from '../components/results/Results'
 
 interface Props {
+  resultLocation: ResultLocationT
   respCount: number
   isLoading: boolean
   result: ResultI | undefined
@@ -9,15 +11,15 @@ interface Props {
 }
 
 const ResultsContainer = (props: Props): JSX.Element | null => {
-  const { isLoading, result, prompt, respCount } = props
+  const { isLoading, result, prompt, respCount, resultLocation } = props
   return (
-    <div className='results-container'>
-      <div id='results-container' className='lower-content__results'>
-        {!isLoading && prompt && respCount > 0 ? (
-          <p className='prompt'>{prompt}</p>
-        ) : null}
-        {isLoading ? null : <ImageList images={result?.data} />}
-      </div>
+    <div className={`result-container ${resultLocation}`}>
+      <Results
+        respCount={respCount}
+        isLoading={isLoading}
+        result={result}
+        prompt={prompt}
+      />
     </div>
   )
 }

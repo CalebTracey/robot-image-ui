@@ -1,5 +1,4 @@
-*.scss
+build
+node_modules
+*.css
 *.svg
-
-/src/dev/
-

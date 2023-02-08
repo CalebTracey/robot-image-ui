@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import ContentContainer from './containers/ContentContainer'
+import ContentContainer from './containers/content/ContentContainer'
 
 const App = (): JSX.Element => {
   const [initializing, setInitializing] = useState(true)

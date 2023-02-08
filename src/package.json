@@ -1,5 +1,6 @@
 {
   "name": "common",
   "version": "1.0.0",
-  "typings": "vite-env.d.ts"
+  "types": "./vite-env.d.ts",
+  "main": "./main.tsx"
 }

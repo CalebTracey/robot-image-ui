@@ -1,7 +1,10 @@
-// eslint-disable-next-line spaced-comment
-/// <reference types="vite/client" />
+declare const AppName = 'AI Hub'
 
 declare type AlertT = { type: 'success' | 'danger'; message: string }
+
+declare type ResultLocationT = 'center' | 'bottom'
+
+declare type SearchBarStateT = 'center' | 'top'
 
 declare interface UrlI {
   url: string
@@ -43,5 +46,3 @@ declare interface ErrorLogI {
   rootCause: string
   trace: string
 }
-
-declare interface

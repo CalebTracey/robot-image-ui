@@ -20,7 +20,8 @@ interface Props {
   respCount: number
 
   handleSubmit: (e: FormEvent<HTMLFormElement>) => void
-
+  setSearchBarState: Dispatch<SetStateAction<SearchBarStateT>>
+  setResultLocation: Dispatch<SetStateAction<ResultLocationT>>
   setRespCount: Dispatch<SetStateAction<number>>
   setPrompt: (str: string) => void
   setIsLoading: Dispatch<SetStateAction<boolean>>
@@ -37,11 +38,13 @@ const InputForm = (props: Props): JSX.Element => {
     setRespCount,
     result,
     isLoading,
+    prompt,
     setPrompt,
     placeholder,
     handleSubmit,
     setIsLoading,
     setResult,
+    setSearchBarState,
   } = props
 
   const [label, setLabel] = useState(defaultLabel)
@@ -67,7 +70,10 @@ const InputForm = (props: Props): JSX.Element => {
       setPrompt(e.target.value)
     }, 500)
 
-    return () => clearTimeout(timer)
+    return () => {
+      clearTimeout(timer)
+      setSearchBarState('center')
+    }
   }
 
   return (
@@ -84,6 +90,7 @@ const InputForm = (props: Props): JSX.Element => {
             as='input'
             type='text'
             name='prompt'
+            // value={prompt}
             disabled={inputDisabled}
             readOnly={inputDisabled}
             placeholder={placeholder}
@@ -95,6 +102,7 @@ const InputForm = (props: Props): JSX.Element => {
           respCount={respCount}
           handleClear={() => {
             setRespCount(0)
+            setSearchBarState('center')
             Handler.Clear({
               setIsLoading,
               setPrompt,

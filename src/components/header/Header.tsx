@@ -1,8 +1,6 @@
 import React from 'react'
 import { Alert } from 'react-bootstrap'
-import HeaderText from './HeaderText'
 
-const PageTitle = 'AI image factory'
 interface Props {
   alert: AlertT | undefined
 }
@@ -13,14 +11,14 @@ const Header = (props: Props): JSX.Element => {
   return (
     <header className='header'>
       <div className='header-content'>
-        <HeaderText text={PageTitle} />
-
+        <div className='header-item-container'>
+          <span style={{ fontWeight: 500 }} className='ph-a'>
+            {AppName}
+          </span>
+        </div>
+        {/* <HeaderText text={PageTitleA} /> */}
         {alert ? (
-          <Alert
-            className='header-alert'
-            show={!!alert}
-            variant={alert?.type}
-          >
+          <Alert className='header-alert' show={!!alert} variant={alert?.type}>
             <span>{alert?.message}</span>
           </Alert>
         ) : null}
