@@ -1,5 +1,5 @@
 import React, { Dispatch, FormEvent, SetStateAction } from 'react'
-import InputForm from '../components/InputForm'
+import SearchBar from '../components/SearchBar'
 
 interface Props {
   isLoading: boolean
@@ -36,7 +36,7 @@ const SearchBarContainer = (props: Props): JSX.Element => {
   } = props
   return (
     <div className={`search-container ${searchBarState}`}>
-      <InputForm
+      <SearchBar
         setResultLocation={setResultLocation}
         setSearchBarState={setSearchBarState}
         respCount={respCount}

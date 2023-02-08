@@ -53,6 +53,10 @@ img {
   height: inherit;
 }
 
+label {
+  color: colors.$secondary-color;
+}
+
 %max-size {
   height: 100%;
   width: 100%;
@@ -232,22 +236,19 @@ img {
   align-items: center;
 }
 
-#floatingInput .form-control:focus {
-  border: none;
-  box-shadow: none;
-  background-color: transparent;
-}
-
 .form-control {
   @extend %border-style;
   @extend %primary-font;
   border: $border-light;
   border-right: 0;
+  
 
   &:focus {
     @extend %border-style;
-    border: $border-light !important;
+    // border: $border-light !important;
     border-right: 0;
+    border-color: rgba(colors.$secondary-color, 0.15);
+    box-shadow: 0 0 0 0.25rem rgba(colors.$secondary-color, 0.15);
   }
 
   &:disabled {
@@ -277,6 +278,13 @@ img {
     color: rgba(colors.$text-color, 0.9);
   }
 
+  &:disabled {
+    @extend %form-button;
+    background-color: colors.$contrast-color;
+    border-color:colors.$contrast-color;
+    color: colors.$text-color,
+  }
+
   &:active {
     @extend %form-button;
     background-color: rgba(colors.$contrast-color, 0.7);
@@ -290,6 +298,14 @@ img {
     border-color: rgba(colors.$contrast-color, 0.7);
     color: rgba(colors.$text-color, 0.7);
   }
+
+  // &:-moz-focusring {
+  //   @extend %form-button;
+  //   background-color: rgba(colors.$contrast-color, 0.7);
+  //   border-color: rgba(colors.$contrast-color, 0.7);
+  //   color: rgba(colors.$text-color, 0.7);
+  // }
+
 }
 
 %image-button {
@@ -329,10 +345,6 @@ img {
 }
 
 .image-list {
-  // display: flex;
-  // gap: 3rem;
-  // height: calc(95vh - 7rem);
-  // align-items: center;
   display: grid;
   grid-gap: 3rem;
   place-content: center;
@@ -342,7 +354,6 @@ img {
 
 .img-thumbnail {
   @extend %border-style;
-  // background-color: colors.$secondary-background-color;
   background-color: colors.$secondary-color;
   border: $border-dark;
 }

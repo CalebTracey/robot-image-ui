@@ -1,5 +1,3 @@
-declare const AppName = 'AI Hub'
-
 declare type AlertT = { type: 'success' | 'danger'; message: string }
 
 declare type ResultLocationT = 'center' | 'bottom'

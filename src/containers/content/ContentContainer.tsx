@@ -22,20 +22,16 @@ const defaultCount = 1
 const tenSeconds = 10000
 
 export const ContentContainer = (props: Props): JSX.Element => {
-  // const { initializing, setInitializing } = props
+  const [resultLocation, setResultLocation] =
+    useState<ResultLocationT>('bottom')
+  const [searchBarState, setSearchBarState] =
+    useState<SearchBarStateT>('center')
 
   const [prompt, setPrompt] = useState<string>('')
   const [result, setResult] = useState<ResultI | undefined>(undefined)
   const [isLoading, setIsLoading] = useState<boolean>(false)
   const [alert, setAlert] = useState<AlertT | undefined>(undefined)
   const [respCount, setRespCount] = useState(0)
-
-  const [resultLocation, setResultLocation] = useState<'bottom' | 'center'>(
-    'bottom',
-  )
-  const [searchBarState, setSearchBarState] = useState<'top' | 'center'>(
-    'center',
-  )
 
   const clearAlert = (): (() => void) => {
     const timer = setTimeout(() => {
@@ -45,19 +41,6 @@ export const ContentContainer = (props: Props): JSX.Element => {
     return () => clearTimeout(timer)
   }
 
-  // useEffect(() => {
-  //   console.log('=== searchBarState is: ' + searchBarState)
-  //   console.log('=== resultLocation is: ' + resultLocation)
-  // }, [searchBarState, resultLocation])
-
-  /**
-   * * handleSubmit
-   * Makes the source call and handles the result when the user submits
-   * an image generation request.
-   *
-   * @param e the event object from submitting the form
-   * @returns void
-   */
   const handleSubmit = (e: FormEvent<HTMLFormElement>): void => {
     e.preventDefault()
     console.log('=== SUBMITTED ===')

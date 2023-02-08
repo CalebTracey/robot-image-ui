@@ -7,8 +7,6 @@ import React, {
   useEffect,
 } from 'react'
 import { Form, InputGroup } from 'react-bootstrap'
-import ContentButtonContainer from '../containers/ContentButtonContainer'
-import Handler from '../services/Handler'
 import SubmitButton from './buttons/SubmitButton'
 
 interface Props {
@@ -32,7 +30,7 @@ const defaultLabel = 'what would you like to see?'
 const resultLabel = 'scroll down to see you results'
 const focusLabel = 'type here'
 
-const InputForm = (props: Props): JSX.Element => {
+const SearchBar = (props: Props): JSX.Element => {
   const {
     respCount,
     setRespCount,
@@ -93,11 +91,13 @@ const InputForm = (props: Props): JSX.Element => {
             // value={prompt}
             disabled={inputDisabled}
             readOnly={inputDisabled}
-            placeholder={placeholder}
+            // placeholder={placeholder}
           />
         </Form.FloatingLabel>
-        {respCount === 0 ? <SubmitButton isLoading={isLoading} /> : null}
-        <ContentButtonContainer
+        <SubmitButton prompt={prompt} isLoading={isLoading} />
+
+        {/* // TODO repurpose this component for image containers */}
+        {/* <ContentButtonContainer
           isLoading={isLoading}
           respCount={respCount}
           handleClear={() => {
@@ -110,10 +110,10 @@ const InputForm = (props: Props): JSX.Element => {
             })
           }}
           result={result}
-        />
+        /> */}
       </InputGroup>
     </Form>
   )
 }
 
-export default InputForm
+export default SearchBar

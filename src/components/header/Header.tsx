@@ -5,6 +5,8 @@ interface Props {
   alert: AlertT | undefined
 }
 
+const AppName = 'AI Hub'
+
 const Header = (props: Props): JSX.Element => {
   const { alert } = props
 
