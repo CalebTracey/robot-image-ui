@@ -1,4 +1,3 @@
-import React from 'react'
 import ClearButton from '../components/buttons/ClearButton'
 import DownloadButton from '../components/buttons/DownloadButton'
 

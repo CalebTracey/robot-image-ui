@@ -1,8 +1,7 @@
-import React from 'react'
 import ImageContainer from '../containers/ImageContainer'
 
 interface Props {
-  images: UrlI[] | undefined
+  images: UrlI[]
 }
 
 export const ImageList = (props: Props): JSX.Element => {

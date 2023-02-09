@@ -40,11 +40,15 @@ body {
   background-color: colors.$neutral-color;
 }
 
-header {
-  @extend %header-font;
+header :is(span) {
+    @extend %header-font;
+    height: 4rem;
+}
+
+header :is(div) {
   background-color: colors.$primary-color;
-  height: 100%;
-  grid-column: 1 / 5;
+  // height: 100%;
+  // grid-column: 1 / 5;
   border-bottom: $border-dark;
 }
 
@@ -73,10 +77,9 @@ label {
 
 .content-container {
   @extend %max-size;
-  display: grid;
-  overflow: scroll;
-  grid-template-columns: repeat(4, 1fr);
-  grid-template-rows: 4em calc(100% - 4em);
+  display: flex;
+  flex-direction: column;
+
 }
 
 .face-container {
@@ -105,12 +108,10 @@ label {
   place-items: center;
 }
 
-.flex-container-centered {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  grid-column: 2/4;
-  grid-row: 1/4;
+.grow-spinner-container {
+  display: grid;
+  grid-column: 1/2;
+  grid-row: 1/2;
 }
 
 .input-form-container {
@@ -122,15 +123,26 @@ label {
 }
 
 .header-item-container {
-  text-align: center;
-  margin: 0.5rem;
   border-radius: 10px;
-  align-items: center;
-  display: flex;
   background-color: #30475e;
-  padding: 0 0.5em;
+  padding: 0 .5rem;
+
+  &__sm {
+    // padding: 1rem;
+  }
 }
 
+.header-span {
+  font-size: 1.5rem;
+}
+
+.loading-page {
+  color: colors.$primary-color;
+  display: grid;
+  place-items: center;
+  height: 100vh;
+  // width: 100vh;
+}
 // .results-container {
 //   text-align: center;
 //   grid-column: 1/5;
@@ -227,8 +239,10 @@ label {
 
 .header-content {
   @extend %header-font;
-  display: flex;
-  gap: 2rem;
+  display: grid;
+  grid-gap: 2rem;
+  padding: 0.5rem;
+  grid-template-columns: repeat(6, 1fr);
 }
 
 .error-fallback {
@@ -282,7 +296,7 @@ label {
     @extend %form-button;
     background-color: colors.$contrast-color;
     border-color:colors.$contrast-color;
-    color: colors.$text-color,
+    color: colors.$text-color;
   }
 
   &:active {
@@ -435,16 +449,13 @@ label {
 }
 
 @media only screen and (hover: none) and (pointer: coarse) {
-  .lower-content {
-    grid-column: 1 / 6;
-  }
-
   header {
     font-size: 0.75rem;
   }
+
+  .search-container {
+    width: 90%;
+  }
 }
 
-.prompt {
-  font-size: x-large;
-  height: 5vh;
-}
+

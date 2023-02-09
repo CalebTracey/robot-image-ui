@@ -1,9 +1,5 @@
-import axios, { AxiosError, AxiosResponse, isAxiosError } from 'axios'
-import Mapper from './Mapper'
-
-const LOCAL_URL = 'http://localhost:8080/v1/image'
-const LOCAL_TEST = 'http://localhost:8080/v1/test'
-const URL_DEV = 'https://dev-zan4mh2kqq-uk.a.run.app/v1/image'
+import axios, { isAxiosError } from 'axios'
+import Constants from '../Constants'
 
 interface Props {
   request: RequestI
@@ -17,7 +13,7 @@ const PostError: ResponseI = {
         scope: 'Service',
         statusCode: '500',
         rootCause: 'Post request failed',
-        trace: 'Post: ',
+        trace: 'Post: error',
       },
     ],
     status: 'ERROR',
@@ -25,30 +21,23 @@ const PostError: ResponseI = {
   },
 }
 
-const Post = async (props: Props): Promise<ResponseI> => {
+const GetImages = async (props: Props): Promise<ResponseI | null> => {
+  const { LocalURL, LocalTestURL, DevURL } = Constants
   const { request } = props
+  try {
+    const response = await axios.post<ResponseI>(DevURL, request)
+    return response.data
+  } catch (error) {
+    if (isAxiosError(error)) {
+      console.error(error.message)
+    } else {
+      console.error(error)
+    }
 
-  return (
-    axios
-      // set url here for now
-      .post(URL_DEV, request)
-      .then((res: AxiosResponse<ResponseI>) => {
-        if (res && res.data) {
-          return res.data
-        } else {
-          return PostError
-        }
-      })
-      .catch((err: AxiosError) => {
-        if (isAxiosError(err)) {
-          console.error(err)
-        }
-
-        return Mapper.errorResponse(err)
-      })
-  )
+    return null
+  }
 }
 
-const Service = { Post }
+const Service = { GetImages }
 
 export default Service

@@ -1,8 +1,11 @@
+declare type ResultT = ResultI | null
 declare type AlertT = { type: 'success' | 'danger'; message: string }
-
-declare type ResultLocationT = 'center' | 'bottom'
-
-declare type SearchBarStateT = 'center' | 'top'
+declare type VoidFn = () => void
+declare type PromiseVoidFn = () => Promise<void>
+declare type InputEventT = ChangeEvent<HTMLInputElement>
+declare type SubmitEventT = FormEvent<HTMLFormElement>
+declare type ResultLocT = 'center' | 'bottom'
+declare type SearchBarLocT = 'center' | 'top'
 
 declare interface UrlI {
   url: string

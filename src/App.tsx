@@ -1,15 +1,24 @@
-import React, { useState } from 'react'
-import ContentContainer from './containers/content/ContentContainer'
+import React, { useEffect, useState } from 'react'
+import { GrowSpinner } from './components/GrowSpinner'
+import ContentContainer from './containers/ContentContainer'
 
 const App = (): JSX.Element => {
-  const [initializing, setInitializing] = useState(true)
+  const [mounted, setMounted] = useState(false)
 
-  return (
+  useEffect(() => {
+    setMounted(true)
+    {
+      console.info('=== mounted!')
+    }
+  }, [setMounted])
+
+  return mounted ? (
     <div className='app'>
-      <ContentContainer
-        initializing={initializing}
-        setInitializing={setInitializing}
-      />
+      <ContentContainer />
+    </div>
+  ) : (
+    <div className='loading-page'>
+      <GrowSpinner />
     </div>
   )
 }

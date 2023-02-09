@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "typeRoots": ["types", "node_modules/@types"],
+    "typeRoots": ["src", "node_modules/@types"],
     "types": ["vite/client"],
     "target": "esnext",
     "useDefineForClassFields": true,
@@ -30,7 +30,7 @@
     "jsdom": true,
     "JSX": true
   },
-  "files": ["src/vite-env.d.ts", "src/containers/content/post.ts"],
+  "files": ["src/vite-env.d.ts"],
   "include": ["src", "src/**/*.ts*"],
   "exclude": ["target", "dist", "node_modules"],
   "references": [{ "path": "./tsconfig.node.json" }]
