@@ -1,117 +1,131 @@
-import { useCallback, useContext, useState } from 'react'
+import { useCallback, useState } from 'react'
 import Constants from '../Constants'
-import { ResultContext } from '../ResultContext'
-import useService, { initialServiceState } from './useService'
+import { ServiceI } from './useService'
+
+type SearchBarResponseT = [SearchBarT, SearchBarI]
 
 export type SearchBarT = {
-  searchLoading: boolean
-  prompt: string
-  location: SearchBarLocT
+    isSearchLoading: boolean
+    Input: string
+    Location: SearchBarLocT
 }
 
 export interface SearchBarI {
-  onSubmit: (e: SubmitEventT) => Promise<TErrorLogs | null>
-  onInputChange: (e: InputEventT) => void
-  onReset: () => void
+    onSubmit: (e: SubmitEventT, service: ServiceI) => Promise<ResponseI | null>
+    onInputChange: (e: InputEventT) => void
+    onReset: () => void
 }
 
 export const initialSearchState: SearchBarT = {
-  searchLoading: false,
-  prompt: '',
-  location: 'center',
+    isSearchLoading: false,
+    Input: '',
+    Location: 'center',
+}
+
+const newErrorResponse = (cause: string): ResponseI => {
+    return {
+        result: { created: 0, data: [] },
+        message: {
+            errorLog: [
+                {
+                    scope: 'Service',
+                    statusCode: '500',
+                    rootCause: cause,
+                    trace: 'Post: error',
+                },
+            ],
+            status: 'ERROR',
+            count: '0',
+        },
+    }
 }
 
 /**
- * * useSearchBar hook
- * @param state
- * @returns
+ * * === useSearchBar hook ===
+ *
+ * @param state: the current state of the search bar.
+ * @returns searchBar state and a handler for the utility functions
  */
 
-const useSearch = (state: SearchBarT): [SearchBarT, SearchBarI] => {
-  const { result, setResult } = useContext(ResultContext)
+const useSearch = (state: SearchBarT): SearchBarResponseT => {
+    const [Response, setResponse] = useState<SearchBarT>(state)
 
-  const [serviceState, { imageRequest }] = useService(initialServiceState)
-  const [response, setResponse] = useState<SearchBarT>(state)
+    const { DefaultSize, DefaultAmount, SearchBarFormId } = Constants
 
-  const { DefaultSize, DefaultAmount } = Constants
+    const onSubmit = async (
+        e: SubmitEventT,
+        Service: ServiceI,
+    ): Promise<ResponseI | null> => {
+        e.preventDefault()
 
-  const onSubmit = async (e: SubmitEventT): Promise<TErrorLogs | null> => {
-    e.preventDefault()
-    const prompt = e.target['floatingInput'].value
-    console.log('=== SUBMIT: ' + prompt)
-    setResponse((prevState) => ({
-      ...prevState,
-      isLoading: true,
-      location: 'top',
-      prompt,
-    }))
+        const Input = e.target[SearchBarFormId].value
 
-    const req: RequestI = {
-      n: DefaultAmount,
-      prompt,
-      size: DefaultSize,
+        setResponse((prevState: SearchBarT) => ({
+            ...prevState,
+            isSearchLoading: true,
+            Location: 'top',
+            Input,
+        }))
+
+        console.log('=== SUBMIT: ' + prompt)
+
+        const apiResponse = await Service.ImageRequest({
+            n: DefaultAmount,
+            size: DefaultSize,
+            prompt: Input,
+        })
+
+        if (apiResponse) {
+            // check backend error log...
+            // TODO maybe some sort of alert custom hook call here?
+            if (apiResponse.message.errorLog) {
+                console.error(JSON.stringify(apiResponse.message.errorLog))
+            }
+            setResponse((prevState: SearchBarT) => ({
+                ...prevState,
+                searchLoading: false,
+            }))
+            return apiResponse
+        }
+
+        setResponse((prevState: SearchBarT) => ({
+            ...prevState,
+            searchLoading: false,
+        }))
+
+        return null
     }
 
-    // const res = await Service.GetImages({ request: req })
-    const res = await imageRequest(req)
+    const onInputChange = useCallback((e: InputEventT) => {
+        e.preventDefault()
+        const Input = e.target.value
+        console.log('=== ' + Input)
 
-    if (res?.result) {
-      setResult(res.result)
+        // throttle setState with timeout
+        const Timer = setTimeout(() => {
+            setResponse((prevState) => ({
+                ...prevState,
+                Input: Input,
+            }))
+        }, 500)
+
+        return clearTimeout(Timer)
+    }, [])
+
+    const onReset = (): void => {
+        // setResult(null)
+        setResponse(initialSearchState)
     }
-    // return res?.message.errorLog ? res?.message.errorLog : null
 
-    setResponse((prevState) => ({
-      ...prevState,
-      isLoading: false,
-    }))
+    const Handler: SearchBarI = {
+        onSubmit,
+        onInputChange,
+        onReset,
+    }
 
-    // if (res !== null) {
-    //   setResponse((prevState) => ({
-    //     ...prevState,
-    //     isLoading: false,
-    //   }))
+    const SearchBarResponse: SearchBarResponseT = [Response, Handler]
 
-    //   return [
-    //     {
-    //       scope: '',
-    //       statusCode: '500',
-    //       rootCause: 'null response',
-    //       trace: 'Service.GetImages',
-    //     },
-    //   ]
-    // } else {
-    //   setResponse((prevState) => ({
-    //     ...prevState,
-    //     searchResponse: res?.result,
-    //     isLoading: false,
-    //   }))
-    // }
-
-    return null
-  }
-
-  const onInputChange = useCallback((e: InputEventT) => {
-    e.preventDefault()
-    console.log('===' + e.target.value)
-    // throttle setState with timeout
-    const timer = setTimeout(() => {
-      setResponse((prevState) => ({ ...prevState, input: e.target.value }))
-    }, 100)
-
-    return clearTimeout(timer)
-  }, [])
-
-  const onReset = (): void => {
-    setResponse(initialSearchState)
-  }
-
-  const handler: SearchBarI = {
-    onSubmit,
-    onInputChange,
-    onReset,
-  }
-
-  return [response, handler]
+    return SearchBarResponse
 }
 
 export default useSearch

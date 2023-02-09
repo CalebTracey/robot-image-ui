@@ -1,34 +1,54 @@
 import { Container } from 'react-bootstrap'
-import useSearch, { initialSearchState } from '../hooks/useSearch'
+import { SearchBarT } from '../hooks/useSearch'
 import SearchBar from '../components/SearchBar'
 import Header from '../components/header/Header'
 import Results from '../components/results/Results'
+import { FC, useContext, useEffect, useState } from 'react'
+import { ResultContext } from '../ResultContext'
 
-export const ContentContainer = (): JSX.Element => {
-  const [searchBarState, handler] = useSearch(initialSearchState)
+interface Props {
+    SearchBarState: SearchBarT
+    SearchBarLoc: SearchBarLocT
+}
 
-  const { location } = searchBarState
+export const ContentContainer: FC<Props> = ({
+    SearchBarState,
+    SearchBarLoc,
+}): JSX.Element => {
+    const { Result, setResult } = useContext(ResultContext)
+    const [Location, setLocation] = useState('center')
 
-  return (
-    <div className='content-container'>
-      <div className='header-container'>
-        <Header />
-      </div>
-      <Container className='content-grid'>
-        <div
-          className={`result-container ${
-            location === 'top' ? 'center' : 'bottom'
-          }`}
-        >
-          <Results searchBarState={searchBarState} />
+    useEffect(() => {
+        if (Result && SearchBarLoc === 'center') {
+            setLocation('top')
+        } else if (!Result && SearchBarLoc === 'top') {
+            setLocation('center')
+        }
+    }, [Result, SearchBarLoc])
+
+    return (
+        <div className='content-container'>
+            <div className='header-container'>
+                <Header />
+            </div>
+            <Container className='content-grid'>
+                <div
+                    className={`result-container ${
+                        Location === 'top' ? 'center' : 'bottom'
+                    }`}
+                >
+                    <Results SearchBarState={SearchBarState} Result={Result} />
+                </div>
+
+                <div className={`search-container ${Location}`}>
+                    <SearchBar
+                        SearchBarState={SearchBarState}
+                        setResult={setResult}
+                    />
+                </div>
+            </Container>
         </div>
-
-        <div className={`search-container ${location}`}>
-          <SearchBar searchState={searchBarState} handler={handler} />
-        </div>
-      </Container>
-    </div>
-  )
+    )
 }
 
 export default ContentContainer

@@ -1,26 +1,40 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { GrowSpinner } from './components/GrowSpinner'
 import ContentContainer from './containers/ContentContainer'
+import useSearch, { initialSearchState } from './hooks/useSearch'
 
 const App = (): JSX.Element => {
-  const [mounted, setMounted] = useState(false)
+    const [Mounted, setMounted] = useState(false)
+    const [SearchBarLoc, setSearchBarLoc] = useState<SearchBarLocT>('center')
+    const [SearchBarState] = useSearch(initialSearchState)
 
-  useEffect(() => {
-    setMounted(true)
-    {
-      console.info('=== mounted!')
-    }
-  }, [setMounted])
+    const { Location } = SearchBarState
 
-  return mounted ? (
-    <div className='app'>
-      <ContentContainer />
-    </div>
-  ) : (
-    <div className='loading-page'>
-      <GrowSpinner />
-    </div>
-  )
+    useEffect(() => {
+        setMounted(true)
+        {
+            console.info('=== mounted!')
+        }
+    }, [setMounted])
+
+    useEffect(() => {
+        if (Location !== SearchBarLoc) {
+            setSearchBarLoc(Location)
+        }
+    }, [Location, SearchBarLoc])
+
+    return Mounted ? (
+        <div className='app'>
+            <ContentContainer
+                SearchBarState={SearchBarState}
+                SearchBarLoc={SearchBarLoc}
+            />
+        </div>
+    ) : (
+        <div className='loading-page'>
+            <GrowSpinner />
+        </div>
+    )
 }
 
 export default App

@@ -1,5 +1,3 @@
-import React from 'react'
-
 const AppName = 'AI Hub'
 
 const Header = (): JSX.Element => {

@@ -1,30 +1,33 @@
-import { FC, useContext } from 'react'
+import { Dispatch, FC, SetStateAction, useContext } from 'react'
 import useSearch, { SearchBarT } from '../../hooks/useSearch'
 import { ResultContext } from '../../ResultContext'
 import { ImageList } from '../ImageList'
 import ResultInfo from './ResultInfo'
 
 interface Props {
-  searchBarState: SearchBarT
+    SearchBarState: SearchBarT
+
+    Result: ResultI | null
 }
 
-const Results: FC<Props> = ({ searchBarState }): JSX.Element => {
-  // TODO add custom state hooks
-  const { result } = useContext(ResultContext)
-  const { searchLoading, prompt } = searchBarState
+const Results = (props: Props): JSX.Element => {
+    const { SearchBarState, Result } = props
+    const [{ isSearchLoading, Input }] = useSearch(SearchBarState)
 
-  return (
-    <div className={'results'}>
-      {!searchLoading && prompt && result ? (
-        <div className='result-info-container'>
-          <ResultInfo prompt={prompt} respCount={result.data.length} />
+    return (
+        <div className='results'>
+            {!isSearchLoading && Input && Result ? (
+                <div className='result-info-container'>
+                    <ResultInfo Input={Input} respCount={Result.data.length} />
+                </div>
+            ) : (
+                <span>Welcome!</span>
+            )}
+            {Result && !isSearchLoading ? (
+                <ImageList images={Result.data} />
+            ) : null}
         </div>
-      ) : (
-        <span>Welcome!</span>
-      )}
-      {result && !searchLoading ? <ImageList images={result.data} /> : null}
-    </div>
-  )
+    )
 }
 
 export default Results

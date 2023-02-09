@@ -10,19 +10,19 @@ $border-light: 1px solid colors.$border-color-light;
 $border-dark: 1px solid colors.$border-color-dark;
 
 %square {
-  display: flex;
-  width: 100%;
-  height: 0;
-  padding-bottom: 100%;
+    display: flex;
+    width: 100%;
+    height: 0;
+    padding-bottom: 100%;
 }
 
 %border-style-light {
-  border-color: colors.$border-color-light;
-  border-radius: 0.375rem;
+    border-color: colors.$border-color-light;
+    border-radius: 0.375rem;
 }
 
 %border-style {
-  border-radius: 0.375rem;
+    border-radius: 0.375rem;
 }
 
 //      ==============
@@ -30,14 +30,14 @@ $border-dark: 1px solid colors.$border-color-dark;
 //      ==============
 
 html {
-  height: 100%;
+    height: 100%;
 }
 
 body {
-  color: colors.$text-color;
-  letter-spacing: 0.5px;
-  min-height: 100%;
-  background-color: colors.$neutral-color;
+    color: colors.$text-color;
+    letter-spacing: 0.5px;
+    min-height: 100%;
+    background-color: colors.$neutral-color;
 }
 
 header :is(span) {
@@ -46,24 +46,22 @@ header :is(span) {
 }
 
 header :is(div) {
-  background-color: colors.$primary-color;
-  // height: 100%;
-  // grid-column: 1 / 5;
-  border-bottom: $border-dark;
+    background-color: colors.$primary-color;
+    border-bottom: $border-dark;
 }
 
 img {
-  max-width: 100%;
-  height: inherit;
+    max-width: 100%;
+    height: inherit;
 }
 
 label {
-  color: colors.$secondary-color;
+    color: colors.$secondary-color;
 }
 
 %max-size {
-  height: 100%;
-  width: 100%;
+    height: 100%;
+    width: 100%;
 }
 
 //      ==================
@@ -71,162 +69,152 @@ label {
 //      ==================
 
 .app {
-  @extend %max-size;
-  position: fixed;
+    @extend %max-size;
+    position: fixed;
 }
 
 .content-container {
-  @extend %max-size;
-  display: flex;
-  flex-direction: column;
-
+    @extend %max-size;
+    display: flex;
+    flex-direction: column;
 }
 
 .face-container {
-  font-size: 3rem;
-  grid-column: 1 / spread 4;
-  display: grid;
-  place-content: center;
+    font-size: 3rem;
+    grid-column: 1 / spread 4;
+    display: grid;
+    place-content: center;
 }
 
 .grid-container {
-  justify-content: space-evenly;
-  overflow: scroll;
-  display: flex;
-  padding: 2rem;
-  grid-row: 3 / spread 2;
+    justify-content: space-evenly;
+    overflow: scroll;
+    display: flex;
+    padding: 2rem;
+    grid-row: 3 / spread 2;
 }
 
 .grid-half {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
 }
 
 .landing-message {
-  grid-column: 1 / spread 4;
-  display: grid;
-  place-items: center;
+    grid-column: 1 / spread 4;
+    display: grid;
+    place-items: center;
 }
 
 .grow-spinner-container {
-  display: grid;
-  grid-column: 1/2;
-  grid-row: 1/2;
+    display: grid;
+    grid-column: 1/2;
+    grid-row: 1/2;
 }
 
 .input-form-container {
-  @extend %primary-font;
+    @extend %primary-font;
 }
 
 .header-container {
-  grid-column: 1 / spread 4;
+    grid-column: 1 / spread 4;
 }
 
 .header-item-container {
-  border-radius: 10px;
-  background-color: #30475e;
-  padding: 0 .5rem;
+    border-radius: 10px;
+    background-color: #30475e;
+    padding: 0 0.5rem;
 
-  &__sm {
-    // padding: 1rem;
-  }
+    &__sm {
+        // padding: 1rem;
+    }
 }
 
 .header-span {
-  font-size: 1.5rem;
+    font-size: 1.5rem;
 }
 
 .loading-page {
-  color: colors.$primary-color;
-  display: grid;
-  place-items: center;
-  height: 100vh;
-  // width: 100vh;
+    color: colors.$primary-color;
+    display: grid;
+    place-items: center;
+    height: 100vh;
+    // width: 100vh;
 }
-// .results-container {
-//   text-align: center;
-//   grid-column: 1/5;
-//   // animation: moveToBottom 0.5s ease-in-out forwards;
-// }
 
 .search-container,
 .result-container {
-  grid-column: 1 / spread;
-  width: 100%;
-  transition: all 0.3s ease-in-out;
-  position: absolute;
-
+    grid-column: 1 / spread;
+    width: 100%;
+    transition: all 0.3s ease-in-out;
 }
 
 .search-container {
-  top: 50%;
-  width: 50%;
-  transform: translateY(-50%);
+    position: absolute;
 
-  &.top {
-    top: 0;
-    transform: translateY(0);
-  }
-
-  &.center {
     top: 50%;
+    width: 50%;
     transform: translateY(-50%);
-  }
+
+    &.top {
+        top: 0;
+        transform: translateY(0);
+    }
+
+    &.center {
+        top: 50%;
+        transform: translateY(-50%);
+    }
 }
 
 .result-container {
-  position: relative;
-  bottom: 50%;
-  transform: translateY(50%);
-
-  &.center {
+    position: relative;
     bottom: 50%;
     transform: translateY(50%);
-    padding-top: 4rem;
-  }
 
-  &.bottom {
-    top: 4rem;
-    bottom: 0;
-    transform: translateY(0);
-  }
+    &.center {
+        bottom: 50%;
+        transform: translateY(50%);
+        padding-top: 4rem;
+    }
+
+    &.bottom {
+        top: 4rem;
+        bottom: 0;
+        transform: translateY(0);
+    }
 }
 
 .form-container {
-  grid-column: 1/5;
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
+    grid-column: 1/5;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
 }
 
 .content-grid {
-  // grid-column: 1 / spread;
-  // position: inherit;
-  // margin-top: 0.5rem;
-  height: 100%;
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  position: relative;
-  
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
 }
 
 %content {
-  border: $border-dark;
-  padding: 3rem;
-  background-color: colors.$primary-color;
-  margin: 2rem;
-  border-radius: 10px;
-  height: fit-content;
+    border: $border-dark;
+    padding: 3rem;
+    background-color: colors.$primary-color;
+    margin: 2rem;
+    border-radius: 10px;
+    height: fit-content;
 }
 
 .form-content {
-  @extend %content;
-
-  &__results {
     @extend %content;
-  }
+
+    &__results {
+        @extend %content;
+    }
 }
 
 //      ==================
@@ -234,230 +222,213 @@ label {
 //      ==================
 
 .header-alert {
-  padding: 0 0.5rem 0 0.5rem;
-  margin: 0;
-  height: 100%;
+    padding: 0 0.5rem 0 0.5rem;
+    margin: 0;
+    height: 100%;
 }
 
 .header-content {
-  @extend %header-font;
-  display: grid;
-  grid-gap: 2rem;
-  padding: 0.5rem;
-  grid-template-columns: repeat(6, 1fr);
+    @extend %header-font;
+    display: grid;
+    grid-gap: 2rem;
+    padding: 0.5rem;
+    grid-template-columns: repeat(6, 1fr);
 }
 
 .error-fallback {
-  display: flex;
-  align-items: center;
+    display: flex;
+    align-items: center;
 }
 
 .form-control {
-  @extend %border-style;
-  @extend %primary-font;
-  border: $border-light;
-  border-right: 0;
-  
-
-  &:focus {
     @extend %border-style;
-    // border: $border-light !important;
-    border-right: 0;
-    border-color: rgba(colors.$secondary-color, 0.15);
-    box-shadow: 0 0 0 0.25rem rgba(colors.$secondary-color, 0.15);
-  }
-
-  &:disabled {
-    @extend %border-style;
+    @extend %primary-font;
     border: $border-light;
-    color: rgba(colors.$text-color, 0.7);
     border-right: 0;
-  }
+
+    &:focus {
+        @extend %border-style;
+        // border: $border-light !important;
+        border-right: 0;
+        border-color: rgba(colors.$secondary-color, 0.15);
+        box-shadow: 0 0 0 0.25rem rgba(colors.$secondary-color, 0.15);
+    }
+
+    &:disabled {
+        @extend %border-style;
+        border: $border-light;
+        color: rgba(colors.$text-color, 0.7);
+        border-right: 0;
+    }
 }
 
 %form-button {
-  @extend %border-style;
-  font-size: 1.5rem;
-  color: rgba(colors.$text-color, 0.7);
-  border: 1px solid colors.$contrast-color;
-  background-color: rgba(colors.$contrast-color, 0.8);
-  padding: 0 1rem;
+    @extend %border-style;
+    font-size: 1.5rem;
+    color: rgba(colors.$text-color, 0.7);
+    border: 1px solid colors.$contrast-color;
+    background-color: rgba(colors.$contrast-color, 0.8);
+    padding: 0 1rem;
 }
 
 .form-button {
-  @extend %form-button;
-
-  &:hover {
     @extend %form-button;
-    background-color: colors.$contrast-color;
-    border-color: colors.$contrast-color;
-    color: rgba(colors.$text-color, 0.9);
-  }
 
-  &:disabled {
-    @extend %form-button;
-    background-color: colors.$contrast-color;
-    border-color:colors.$contrast-color;
-    color: colors.$text-color;
-  }
+    &:hover {
+        @extend %form-button;
+        background-color: colors.$contrast-color;
+        border-color: colors.$contrast-color;
+        color: rgba(colors.$text-color, 0.9);
+    }
 
-  &:active {
-    @extend %form-button;
-    background-color: rgba(colors.$contrast-color, 0.7);
-    border-color: rgba(colors.$contrast-color, 0.7);
-    color: rgba(colors.$text-color, 0.7);
-  }
+    &:disabled {
+        @extend %form-button;
+        background-color: colors.$contrast-color;
+        border-color: colors.$contrast-color;
+        color: colors.$text-color;
+    }
 
-  &:focus {
-    @extend %form-button;
-    background-color: rgba(colors.$contrast-color, 0.7);
-    border-color: rgba(colors.$contrast-color, 0.7);
-    color: rgba(colors.$text-color, 0.7);
-  }
+    &:active {
+        @extend %form-button;
+        background-color: rgba(colors.$contrast-color, 0.7);
+        border-color: rgba(colors.$contrast-color, 0.7);
+        color: rgba(colors.$text-color, 0.7);
+    }
 
-  // &:-moz-focusring {
-  //   @extend %form-button;
-  //   background-color: rgba(colors.$contrast-color, 0.7);
-  //   border-color: rgba(colors.$contrast-color, 0.7);
-  //   color: rgba(colors.$text-color, 0.7);
-  // }
-
+    &:focus {
+        @extend %form-button;
+        background-color: rgba(colors.$contrast-color, 0.7);
+        border-color: rgba(colors.$contrast-color, 0.7);
+        color: rgba(colors.$text-color, 0.7);
+    }
 }
 
 %image-button {
-  font-size: 1.25rem;
-  color: rgba(colors.$text-color, 0.7);
-  border: 1px solid colors.$contrast-color;
-  background-color: rgba(colors.$contrast-color, 0.8);
-  padding: .25rem;
-  transition: all 0.3s ease-in-out;
+    font-size: 1.25rem;
+    color: rgba(colors.$text-color, 0.7);
+    border: 1px solid colors.$contrast-color;
+    background-color: rgba(colors.$contrast-color, 0.8);
+    padding: 0.25rem;
+    transition: all 0.3s ease-in-out;
 }
 
 .image-button {
-  @extend %image-button;
-  @extend %border-style;
-  scale: 90%;
-
-  &:hover {
     @extend %image-button;
-    background-color: colors.$contrast-color;
-    border-color: colors.$contrast-color;
-    color: rgba(colors.$text-color, 0.9);
-  }
+    @extend %border-style;
+    scale: 90%;
 
-  &:active {
-    @extend %image-button;
-    background-color: rgba(colors.$contrast-color, 0.7);
-    border-color: rgba(colors.$contrast-color, 0.7);
-    color: rgba(colors.$text-color, 0.7);
-  }
+    &:hover {
+        @extend %image-button;
+        background-color: colors.$contrast-color;
+        border-color: colors.$contrast-color;
+        color: rgba(colors.$text-color, 0.9);
+    }
 
-  &:focus {
-    @extend %image-button;
-    background-color: rgba(colors.$contrast-color, 0.7);
-    border-color: rgba(colors.$contrast-color, 0.7);
-    color: rgba(colors.$text-color, 0.7);
-  }
+    &:active {
+        @extend %image-button;
+        background-color: rgba(colors.$contrast-color, 0.7);
+        border-color: rgba(colors.$contrast-color, 0.7);
+        color: rgba(colors.$text-color, 0.7);
+    }
+
+    &:focus {
+        @extend %image-button;
+        background-color: rgba(colors.$contrast-color, 0.7);
+        border-color: rgba(colors.$contrast-color, 0.7);
+        color: rgba(colors.$text-color, 0.7);
+    }
 }
 
 .image-list {
-  display: grid;
-  grid-gap: 3rem;
-  place-content: center;
-  padding: 1rem;
-  grid-template-columns: repeat(2, 1fr);
+    display: grid;
+    grid-gap: 3rem;
+    place-content: center;
+    padding: 1rem;
+    grid-template-columns: repeat(2, 1fr);
 }
 
 .img-thumbnail {
-  @extend %border-style;
-  background-color: colors.$secondary-color;
-  border: $border-dark;
+    @extend %border-style;
+    background-color: colors.$secondary-color;
+    border: $border-dark;
 }
 
 .image-item-container {
-
 }
 
 .image-item {
-  @extend %max-size;
-  min-width: 0;
-  min-height: 0;
-  padding-bottom: 100%;
+    @extend %max-size;
+    min-width: 0;
+    min-height: 0;
+    padding-bottom: 100%;
 }
 
 .scroll-button {
-  @extend %form-button;
-  grid-column: 2/4;
-  margin: auto;
-
-  &:hover {
     @extend %form-button;
-    background-color: colors.$contrast-color;
-    border-color: colors.$contrast-color;
-    color: rgba(colors.$text-color, 0.9);
-
     grid-column: 2/4;
     margin: auto;
-  }
 
-  &:active {
-    @extend %form-button;
-    background-color: rgba(colors.$contrast-color, 0.7);
-    border-color: rgba(colors.$contrast-color, 0.7);
-    color: rgba(colors.$text-color, 0.7);
-    grid-column: 2/4;
-    margin: auto;
-  }
+    &:hover {
+        @extend %form-button;
+        background-color: colors.$contrast-color;
+        border-color: colors.$contrast-color;
+        color: rgba(colors.$text-color, 0.9);
 
-  &:focus {
-    @extend %form-button;
-    background-color: rgba(colors.$contrast-color, 0.7);
-    border-color: rgba(colors.$contrast-color, 0.7);
-    color: rgba(colors.$text-color, 0.7);
+        grid-column: 2/4;
+        margin: auto;
+    }
 
-    grid-column: 2/4;
-    margin: auto;
-  }
+    &:active {
+        @extend %form-button;
+        background-color: rgba(colors.$contrast-color, 0.7);
+        border-color: rgba(colors.$contrast-color, 0.7);
+        color: rgba(colors.$text-color, 0.7);
+        grid-column: 2/4;
+        margin: auto;
+    }
+
+    &:focus {
+        @extend %form-button;
+        background-color: rgba(colors.$contrast-color, 0.7);
+        border-color: rgba(colors.$contrast-color, 0.7);
+        color: rgba(colors.$text-color, 0.7);
+
+        grid-column: 2/4;
+        margin: auto;
+    }
 }
 
 .results {
-  margin: 1rem;
-
+    margin: 1rem;
 }
 
 .result-info-container {
-  @extend %primary-font;
-  background-color: colors.$secondary-color;
-  border-radius: 10px;
-  text-align: center;
-  padding: .5rem;
-  // height: 2rem;
-  // width: 16rem;
-  height: 4rem;
-  background: gray;
-  // margin-left: 2rem;
+    @extend %primary-font;
+    background-color: colors.$secondary-color;
+    border-radius: 10px;
+    text-align: center;
+    padding: 0.5rem;
+    height: 4rem;
+    background: gray;
 }
 
 .result-info {
-  
 }
 
 .search-row {
-  margin-top: 2rem;
+    margin-top: 2rem;
 }
 
 .image-container {
-  // max-height: 25vh;
+    // max-height: 25vh;
 }
 
 @media only screen and (hover: none) and (pointer: coarse) {
-  header {
-    font-size: 0.75rem;
-  }
+    header {
+        font-size: 0.75rem;
+    }
 
-  .search-container {
-    width: 90%;
-  }
+    .search-container {
+        width: 90%;
+    }
 }
-
-
