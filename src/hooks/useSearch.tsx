@@ -16,12 +16,13 @@ export interface SearchBarI {
     onReset: () => void
 }
 
-export const initialSearchState: SearchBarT = {
+export const InitialSearchState: SearchBarT = {
     isSearchLoading: false,
     Input: '',
     Location: 'center',
 }
 
+// TODO implement this
 const newErrorResponse = (cause: string): ResponseI => {
     return {
         result: { created: 0, data: [] },
@@ -67,8 +68,6 @@ const useSearch = (state: SearchBarT): SearchBarResponseT => {
             Input,
         }))
 
-        console.log('=== SUBMIT: ' + prompt)
-
         const apiResponse = await Service.ImageRequest({
             n: DefaultAmount,
             size: DefaultSize,
@@ -99,8 +98,6 @@ const useSearch = (state: SearchBarT): SearchBarResponseT => {
     const onInputChange = useCallback((e: InputEventT) => {
         e.preventDefault()
         const Input = e.target.value
-        console.log('=== ' + Input)
-
         // throttle setState with timeout
         const Timer = setTimeout(() => {
             setResponse((prevState) => ({
@@ -113,8 +110,7 @@ const useSearch = (state: SearchBarT): SearchBarResponseT => {
     }, [])
 
     const onReset = (): void => {
-        // setResult(null)
-        setResponse(initialSearchState)
+        setResponse(InitialSearchState)
     }
 
     const Handler: SearchBarI = {

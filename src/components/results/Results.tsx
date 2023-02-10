@@ -1,6 +1,4 @@
-import { Dispatch, FC, SetStateAction, useContext } from 'react'
 import useSearch, { SearchBarT } from '../../hooks/useSearch'
-import { ResultContext } from '../../ResultContext'
 import { ImageList } from '../ImageList'
 import ResultInfo from './ResultInfo'
 
@@ -20,9 +18,7 @@ const Results = (props: Props): JSX.Element => {
                 <div className='result-info-container'>
                     <ResultInfo Input={Input} respCount={Result.data.length} />
                 </div>
-            ) : (
-                <span>Welcome!</span>
-            )}
+            ) : null}
             {Result && !isSearchLoading ? (
                 <ImageList images={Result.data} />
             ) : null}

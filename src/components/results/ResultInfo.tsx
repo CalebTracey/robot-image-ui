@@ -1,4 +1,4 @@
-import React from 'react'
+import { Col, Container, Row } from 'react-bootstrap'
 
 interface Props {
     respCount: number
@@ -6,7 +6,21 @@ interface Props {
 }
 
 const ResultInfo = (props: Props): JSX.Element => {
-    return <div className='result-info'>ResultInfo</div>
+    const { Input, respCount } = props
+    return (
+        <div className='result-info'>
+            <Container>
+                <Col>
+                    <Row>
+                        <span>{Input}</span>
+                    </Row>
+                    <Row>
+                        <span>Total: {respCount}</span>
+                    </Row>
+                </Col>
+            </Container>
+        </div>
+    )
 }
 
 export default ResultInfo

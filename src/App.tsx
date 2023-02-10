@@ -1,12 +1,12 @@
 import { useEffect, useState } from 'react'
 import { GrowSpinner } from './components/GrowSpinner'
 import ContentContainer from './containers/ContentContainer'
-import useSearch, { initialSearchState } from './hooks/useSearch'
+import useSearch, { InitialSearchState } from './hooks/useSearch'
 
 const App = (): JSX.Element => {
     const [Mounted, setMounted] = useState(false)
     const [SearchBarLoc, setSearchBarLoc] = useState<SearchBarLocT>('center')
-    const [SearchBarState] = useSearch(initialSearchState)
+    const [SearchBarState] = useSearch(InitialSearchState)
 
     const { Location } = SearchBarState
 

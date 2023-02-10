@@ -3,7 +3,7 @@ import { SearchBarT } from '../hooks/useSearch'
 import SearchBar from '../components/SearchBar'
 import Header from '../components/header/Header'
 import Results from '../components/results/Results'
-import { FC, useContext, useEffect, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import { ResultContext } from '../ResultContext'
 
 interface Props {
@@ -11,10 +11,9 @@ interface Props {
     SearchBarLoc: SearchBarLocT
 }
 
-export const ContentContainer: FC<Props> = ({
-    SearchBarState,
-    SearchBarLoc,
-}): JSX.Element => {
+const ContentContainer = (props: Props): JSX.Element => {
+    const { SearchBarState, SearchBarLoc } = props
+
     const { Result, setResult } = useContext(ResultContext)
     const [Location, setLocation] = useState('center')
 
@@ -26,23 +25,23 @@ export const ContentContainer: FC<Props> = ({
         }
     }, [Result, SearchBarLoc])
 
+    const resultContainerLoc = (): ResultLocT =>
+        Location === 'top' ? 'center' : 'bottom'
+
     return (
         <div className='content-container'>
             <div className='header-container'>
                 <Header />
             </div>
             <Container className='content-grid'>
-                <div
-                    className={`result-container ${
-                        Location === 'top' ? 'center' : 'bottom'
-                    }`}
-                >
+                <div className={`result-container ${resultContainerLoc()}`}>
                     <Results SearchBarState={SearchBarState} Result={Result} />
                 </div>
 
                 <div className={`search-container ${Location}`}>
                     <SearchBar
                         SearchBarState={SearchBarState}
+                        Result={Result}
                         setResult={setResult}
                     />
                 </div>

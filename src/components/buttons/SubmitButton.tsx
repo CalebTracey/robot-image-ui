@@ -1,19 +1,27 @@
 import { Button } from 'react-bootstrap'
 import { GrowSpinner } from '../GrowSpinner'
 import { BsArrowRight } from 'react-icons/bs'
-
+import { SearchBarT } from '../../hooks/useSearch'
+import { FC, useEffect, useState } from 'react'
 interface Props {
-    isSearchLoading: boolean
+    SearchBarState: SearchBarT
 }
 
-const SubmitButton = (props: Props): JSX.Element => {
-    const { isSearchLoading } = props
+const SubmitButton: FC<Props> = ({ SearchBarState }): JSX.Element => {
+    const [isLoading, setIsLoading] = useState(false)
+    const { isSearchLoading } = SearchBarState
+
+    useEffect(() => {
+        if (isLoading !== isSearchLoading) {
+            setIsLoading(isSearchLoading)
+        }
+    }, [isSearchLoading, isLoading])
 
     return (
         <Button
             className='form-button'
             type='submit'
-            disabled={isSearchLoading}
+            disabled={isLoading}
             // active={isLoading}
         >
             {isSearchLoading ? <GrowSpinner /> : <BsArrowRight />}
