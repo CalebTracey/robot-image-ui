@@ -10,7 +10,9 @@ interface Props {
 const SubmitButton: FC<Props> = ({ isLoading }): JSX.Element => {
     return (
         <Button className='form-button' type='submit' disabled={isLoading}>
-            {isLoading ? <GrowSpinner /> : <BsArrowRight />}
+            <div style={{ width: '2rem' }}>
+                {isLoading ? <GrowSpinner /> : <BsArrowRight />}
+            </div>
         </Button>
     )
 }

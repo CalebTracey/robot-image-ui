@@ -1,4 +1,4 @@
-import { createContext, useState, Dispatch, SetStateAction } from 'react'
+import { createContext, Dispatch, SetStateAction, useState } from 'react'
 
 interface StateI {
     Result: ResultT

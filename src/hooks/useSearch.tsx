@@ -88,8 +88,12 @@ const useSearch = (state: SearchBarT): SearchBarResponseT => {
         // handle errors here
         if (isErrorI(apiResponse)) {
             const err = apiResponse as ErrorI
-            console.error('error: ' + err.RootCause + '\n')
-            console.error(JSON.stringify(err.ErrorLog))
+            if (err) {
+                console.error('error: ' + err.RootCause + '\n')
+                console.error(JSON.stringify(err.ErrorLog))
+            } else {
+                console.error('search error: ' + err)
+            }
         }
         // successful response
         if (isResponseI(apiResponse)) {

@@ -84,11 +84,11 @@ const useService = (state: ServiceT): [ServiceT, ServiceI] => {
         return null
     }
 
-    const Handler: ServiceI = {
+    const DAO: ServiceI = {
         ImageRequest,
     }
 
-    return [Response, Handler]
+    return [Response, DAO]
 }
 
 export default useService

@@ -1,8 +1,8 @@
-import { Container } from 'react-bootstrap'
-import useSearch, { InitialSearchState } from '../hooks/useSearch'
-import Header from '../components/header/Header'
 import { useContext } from 'react'
+import { Container } from 'react-bootstrap'
+import Header from '../components/header/Header'
 import { ResultContext } from '../context/ResultContext'
+import useSearch, { InitialSearchState } from '../hooks/useSearch'
 import ResultContainer from './ResultContainer'
 import SearchBarContainer from './SearchBarContainer'
 
@@ -27,6 +27,8 @@ const ContentContainer = (): JSX.Element => {
                     Result={Result}
                 />
                 <SearchBarContainer
+                    // Location={Location}
+                    // isSearchLoading={isSearchLoading && isServiceLoading}
                     SearchBarState={SearchBarState}
                     Result={Result}
                     setResult={setResult}
