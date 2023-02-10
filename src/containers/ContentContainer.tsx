@@ -1,106 +1,53 @@
-import React, { FormEvent, useEffect, useState } from 'react'
-// import { InputFormContainer } from './InputFormContainer'
-import Service from '../services/Service'
-import { ErrorBoundary } from 'react-error-boundary'
-import { ErrorFallback } from '../components/ErrorFallback'
-import ResultsContainer from './ResultsContainer'
-import FaceContainer from './FaceContainer'
-import HeaderContainer from './HeaderContainer'
-import InputForm from '../components/InputForm'
+import { Container } from 'react-bootstrap'
+import { SearchBarT } from '../hooks/useSearch'
+import SearchBar from '../components/SearchBar'
+import Header from '../components/header/Header'
+import Results from '../components/results/Results'
+import { useContext, useEffect, useState } from 'react'
+import { ResultContext } from '../ResultContext'
 
-const placeholder = 'Two bears fighting aliens with light sabers'
-const defaultSize = '1024x1024'
-const defaultCount = 1
-const tenSeconds = 10000
+interface Props {
+    SearchBarState: SearchBarT
+    SearchBarLoc: SearchBarLocT
+}
 
-// const testAlert: AlertT = { type: 'success', message: 'success message!' }
+const ContentContainer = (props: Props): JSX.Element => {
+    const { SearchBarState, SearchBarLoc } = props
 
-export const ContentContainer = (): JSX.Element => {
-  const [prompt, setPrompt] = useState<string>('')
-  const [result, setResult] = useState<ResultI | undefined>(undefined)
-  const [isLoading, setIsLoading] = useState<boolean>(false)
-  const [alert, setAlert] = useState<AlertT | undefined>(undefined)
+    const { Result, setResult } = useContext(ResultContext)
+    const [Location, setLocation] = useState('center')
 
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setAlert(undefined)
-    }, tenSeconds)
-
-    return () => clearTimeout(timer)
-  }, [alert])
-
-  /**
-   * * handleSubmit
-   * Makes the source call and handles the result when the user submits
-   * an image generation request.
-   * ? is using Context API a better way to manage state
-   * ? would that allow us to not prop drill this function
-   *
-   * @param e the event object from submitting the form
-   * @returns void
-   */
-  const handleSubmit = (e: FormEvent<HTMLFormElement>): void => {
-    e.preventDefault()
-    console.log('=== SUBMITTED ===')
-
-    const req: RequestI = { n: defaultCount, prompt, size: defaultSize }
-
-    setIsLoading(true)
-
-    Service.Post({ request: req })
-      .then((res: ResponseI | undefined) => {
-        if (res?.result) {
-          if (res.result.data.length == 0) {
-            // is this sketchy?
-            setResult(undefined)
-            setAlert({ type: 'danger', message: 'None found!' })
-          }
-          setResult(res.result)
-          setAlert({ type: 'success', message: 'Success!' })
+    useEffect(() => {
+        if (Result && SearchBarLoc === 'center') {
+            setLocation('top')
+        } else if (!Result && SearchBarLoc === 'top') {
+            setLocation('center')
         }
-        return
-      })
-      .finally(() => setIsLoading(false))
+    }, [Result, SearchBarLoc])
 
-    return e.currentTarget.reset()
-  }
-  const [respCount, setRespCount] = useState(0)
+    const resultContainerLoc = (): ResultLocT =>
+        Location === 'top' ? 'center' : 'bottom'
 
-  useEffect(() => {
-    if (result && result?.data) {
-      if (result?.data.length !== null) {
-        setRespCount(result.data.length)
-      }
-    }
-  }, [result])
+    return (
+        <div className='content-container'>
+            <div className='header-container'>
+                <Header />
+            </div>
+            <Container className='content-grid'>
+                <div className={`result-container ${resultContainerLoc()}`}>
+                    <Results SearchBarState={SearchBarState} Result={Result} />
+                </div>
 
-  return (
-    <div className='content'>
-      <div className='upper-content'>
-        <HeaderContainer alert={alert} />
-        <FaceContainer isLoading={isLoading} respCount={respCount} />
-      </div>
-      <ErrorBoundary FallbackComponent={ErrorFallback}>
-        <div className='grid-half__input align-items-center'>
-          <InputForm
-            respCount={respCount}
-            setRespCount={setRespCount}
-            setIsLoading={setIsLoading}
-            setResult={setResult}
-            result={result}
-            isLoading={isLoading}
-            setPrompt={setPrompt}
-            prompt={prompt}
-            handleSubmit={handleSubmit}
-            placeholder={placeholder}
-          />
+                <div className={`search-container ${Location}`}>
+                    <SearchBar
+                        SearchBarState={SearchBarState}
+                        Result={Result}
+                        setResult={setResult}
+                    />
+                </div>
+            </Container>
         </div>
-      </ErrorBoundary>
-      {result ? (
-        <ResultsContainer isLoading={isLoading} result={result} />
-      ) : null}
-    </div>
-  )
+    )
 }
 
 export default ContentContainer

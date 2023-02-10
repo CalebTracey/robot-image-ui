@@ -1,7 +1,11 @@
-// eslint-disable-next-line spaced-comment
-/// <reference types="vite/client" />
-
+declare type ResultT = ResultI | null
 declare type AlertT = { type: 'success' | 'danger'; message: string }
+declare type VoidFn = () => void
+declare type PromiseVoidFn = () => Promise<void>
+declare type InputEventT = ChangeEvent<HTMLInputElement>
+declare type SubmitEventT = FormEvent<HTMLFormElement>
+declare type ResultLocT = 'center' | 'bottom'
+declare type SearchBarLocT = 'center' | 'top'
 
 declare interface UrlI {
   url: string
@@ -43,5 +47,3 @@ declare interface ErrorLogI {
   rootCause: string
   trace: string
 }
-
-declare interface

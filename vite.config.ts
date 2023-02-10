@@ -1,19 +1,34 @@
-import { defineConfig, loadEnv } from 'vite'
+/* eslint-disable max-len */
+import { build, ConfigEnv, defineConfig, loadEnv, UserConfig } from 'vite'
 import react from '@vitejs/plugin-react'
+import linter from 'vite-plugin-linter'
 
+const { EsLinter, linterPlugin, TypeScriptLinter } = linter
 // https://vitejs.dev/config/
-export default defineConfig(({command, mode }) => {
-  const env = loadEnv(mode, process.cwd(), '')
 
-  return {
-    // vite config
-    base: '/robot-image-ui/',
-    plugins: [react()],
-  }
-  // publicPath: process.env.NODE_ENV === 'production' ? '/robot-image-ui/' : '/'
-})
+export default defineConfig(
+  (configEnv: ConfigEnv): UserConfig | Promise<UserConfig> => {
+    // const env = loadEnv(mode, process.cwd(), '')
+    return {
+      base: '/robot-image-ui/',
+      build: {},
+      plugins: [
+        react(),
+        linterPlugin({
+          include: ['./src/**/*.ts', './src/**/*.tsx'],
+          linters: [
+            new EsLinter({
+              configEnv: configEnv,
+              serveOptions: { clearCacheOnStart: true },
+            }),
+            new TypeScriptLinter(),
+          ],
+        }),
+      ],
+      // define: {
 
-// module.exports = {
-//   config,
-//   publicPath: process.env.NODE_ENV === 'production' ? '/robot-image-ui/' : '/'
-// };
+      //   API_URL: '',
+      // },
+    }
+  },
+)
