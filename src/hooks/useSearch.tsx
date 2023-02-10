@@ -23,23 +23,23 @@ export const InitialSearchState: SearchBarT = {
 }
 
 // TODO implement this
-const newErrorResponse = (cause: string): ResponseI => {
-    return {
-        result: { created: 0, data: [] },
-        message: {
-            errorLog: [
-                {
-                    scope: 'Service',
-                    statusCode: '500',
-                    rootCause: cause,
-                    trace: 'Post: error',
-                },
-            ],
-            status: 'ERROR',
-            count: '0',
-        },
-    }
-}
+// const newErrorResponse = (cause: string): ResponseI => {
+//     return {
+//         result: { created: 0, data: [] },
+//         message: {
+//             errorLog: [
+//                 {
+//                     scope: 'Service',
+//                     statusCode: '500',
+//                     rootCause: cause,
+//                     trace: 'Post: error',
+//                 },
+//             ],
+//             status: 'ERROR',
+//             count: '0',
+//         },
+//     }
+// }
 
 /**
  * * === useSearchBar hook ===
