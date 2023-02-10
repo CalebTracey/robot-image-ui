@@ -1,6 +1,8 @@
 import { useCallback, useState } from 'react'
 import Constants from '../Constants'
-import { ServiceI } from './useService'
+import { ErrorI, ServiceI } from './useService'
+
+const { DefaultSize, DefaultAmount, SearchBarFormId } = Constants
 
 type SearchBarResponseT = [SearchBarT, SearchBarI]
 
@@ -11,7 +13,10 @@ export type SearchBarT = {
 }
 
 export interface SearchBarI {
-    onSubmit: (e: SubmitEventT, service: ServiceI) => Promise<ResponseI | null>
+    onSubmit: (
+        e: SubmitEventT,
+        service: ServiceI,
+    ) => Promise<ResponseI | ErrorI | null>
     onInputChange: (e: InputEventT) => void
     onReset: () => void
 }
@@ -41,6 +46,14 @@ export const InitialSearchState: SearchBarT = {
 //     }
 // }
 
+export const isResponseI = (response: any): boolean => {
+    return (response as ResponseI) !== undefined
+}
+
+export const isErrorI = (response: any): boolean => {
+    return (response as ErrorI) !== undefined
+}
+
 /**
  * * === useSearchBar hook ===
  *
@@ -51,12 +64,10 @@ export const InitialSearchState: SearchBarT = {
 const useSearch = (state: SearchBarT): SearchBarResponseT => {
     const [Response, setResponse] = useState<SearchBarT>(state)
 
-    const { DefaultSize, DefaultAmount, SearchBarFormId } = Constants
-
     const onSubmit = async (
         e: SubmitEventT,
         Service: ServiceI,
-    ): Promise<ResponseI | null> => {
+    ): Promise<ResponseI | ErrorI | null> => {
         e.preventDefault()
 
         const Input = e.target[SearchBarFormId].value
@@ -74,17 +85,15 @@ const useSearch = (state: SearchBarT): SearchBarResponseT => {
             prompt: Input,
         })
 
-        if (apiResponse) {
-            // check backend error log...
-            // TODO maybe some sort of alert custom hook call here?
-            if (apiResponse.message.errorLog) {
-                console.error(JSON.stringify(apiResponse.message.errorLog))
-            }
-            setResponse((prevState: SearchBarT) => ({
-                ...prevState,
-                searchLoading: false,
-            }))
-            return apiResponse
+        // handle errors here
+        if (isErrorI(apiResponse)) {
+            const err = apiResponse as ErrorI
+            console.error('error: ' + err.RootCause + '\n')
+            console.error(JSON.stringify(err.ErrorLog))
+        }
+        // successful response
+        if (isResponseI(apiResponse)) {
+            console.info('=== Service: ImageRequest: success')
         }
 
         setResponse((prevState: SearchBarT) => ({
@@ -92,7 +101,7 @@ const useSearch = (state: SearchBarT): SearchBarResponseT => {
             searchLoading: false,
         }))
 
-        return null
+        return apiResponse
     }
 
     const onInputChange = useCallback((e: InputEventT) => {

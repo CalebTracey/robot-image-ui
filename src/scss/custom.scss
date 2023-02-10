@@ -119,14 +119,19 @@ label {
     border-radius: 10px;
     background-color: colors.$primary-color;
     padding: 0 0.5rem;
-
+    // margin: 0 auto;
     &__sm {
+        // margin: 0 auto;
         // padding: 1rem;
     }
 }
 
 .header-span {
     font-size: 1.5rem;
+    &__sm {
+        font-size: 1.5rem;
+        margin: 0 1rem;
+    }
 }
 
 .loading-page {
@@ -226,10 +231,8 @@ label {
 
 .header-content {
     @extend %header-font;
-    display: grid;
-    grid-gap: 2rem;
+    display: flex;
     padding: 0.5rem;
-    grid-template-columns: repeat(6, 1fr);
 }
 
 .error-fallback {

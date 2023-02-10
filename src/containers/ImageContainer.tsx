@@ -10,7 +10,7 @@ export const ImageContainer = (props: Props): JSX.Element => {
 
     return (
         <Container>
-            <DownloadButton result={src} />
+            <DownloadButton src={src} />
             <div className='image-item'>
                 <Image
                     className='image-container'

@@ -1,25 +1,31 @@
-import { useState, useEffect, SetStateAction, Dispatch } from 'react'
+import {
+    useState,
+    useEffect,
+    SetStateAction,
+    Dispatch,
+    useCallback,
+} from 'react'
 import { Form, InputGroup } from 'react-bootstrap'
 import Constants from '../Constants'
-import useSearch, { SearchBarT } from '../hooks/useSearch'
+import { isResponseI, SearchBarI } from '../hooks/useSearch'
 import useService, { InitialServiceState } from '../hooks/useService'
 import SubmitButton from './buttons/SubmitButton'
 
 const { DefaultLabel, SearchLabel } = Constants
 
 interface Props {
-    SearchBarState: SearchBarT
-
+    isSearchLoading: boolean
+    Handler: SearchBarI
     Result: ResultI | null
     setResult: Dispatch<SetStateAction<ResultI | null>>
 }
 
 const SearchBar = (props: Props): JSX.Element => {
-    const { SearchBarState, Result, setResult } = props
+    const { isSearchLoading, Handler, setResult } = props
 
-    const [{ isSearchLoading }, Handler] = useSearch(SearchBarState)
     const [, Service] = useService(InitialServiceState)
     const [Label, setLabel] = useState(DefaultLabel)
+    const [isLoading, setIsLoading] = useState(false)
 
     const { onSubmit, onInputChange } = Handler
 
@@ -29,20 +35,28 @@ const SearchBar = (props: Props): JSX.Element => {
 
         const response = await onSubmit(e, Service)
 
-        if (response) {
-            response.message.errorLog
-                ? console.error(JSON.stringify(response.message.errorLog))
-                : console.info('=== request successful!')
-
+        if (isResponseI(response)) {
+            const resp = response as ResponseI
             setLabel(DefaultLabel)
-            setResult(response.result)
+            setResult(resp.result)
         }
     }
 
+    const handleIsLoading = useCallback((loading: boolean) => {
+        loading ? setLabel(SearchLabel) : setLabel(DefaultLabel)
+        setIsLoading((prevState) =>
+            prevState !== loading ? loading : prevState,
+        )
+    }, [])
+
     useEffect(() => {
-        isSearchLoading ? setLabel(SearchLabel) : setLabel(DefaultLabel)
-        return () => setLabel(DefaultLabel)
-    }, [isSearchLoading, Result])
+        handleIsLoading(isSearchLoading)
+
+        return () => {
+            setLabel(DefaultLabel)
+            setIsLoading(false)
+        }
+    }, [handleIsLoading, isSearchLoading])
 
     return (
         <Form
@@ -59,7 +73,7 @@ const SearchBar = (props: Props): JSX.Element => {
                     />
                 </Form.FloatingLabel>
 
-                <SubmitButton SearchBarState={SearchBarState} />
+                <SubmitButton isLoading={isLoading} />
             </InputGroup>
         </Form>
     )
