@@ -1,6 +1,6 @@
-import { useCallback, useState } from 'react'
+import {useCallback, useState} from 'react'
 import Constants from '../Constants'
-import { ErrorI, ServiceI } from './useService'
+import {ErrorI, ServiceI} from './useService'
 
 const { DefaultSize, DefaultAmount, SearchBarFormId } = Constants
 
@@ -117,7 +117,7 @@ const useSearch = (state: SearchBarT): SearchBarResponseT => {
                 ...prevState,
                 Input: Input,
             }))
-        }, 500)
+        }, 500) // 500ms
 
         return clearTimeout(Timer)
     }, [])
@@ -132,9 +132,7 @@ const useSearch = (state: SearchBarT): SearchBarResponseT => {
         onReset,
     }
 
-    const SearchBarResponse: SearchBarResponseT = [Response, Handler]
-
-    return SearchBarResponse
+    return [Response, Handler]
 }
 
 export default useSearch

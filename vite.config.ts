@@ -7,28 +7,27 @@ const { EsLinter, linterPlugin, TypeScriptLinter } = linter
 // https://vitejs.dev/config/
 
 export default defineConfig(
-  (configEnv: ConfigEnv): UserConfig | Promise<UserConfig> => {
-    // const env = loadEnv(mode, process.cwd(), '')
-    return {
-      base: '/robot-image-ui/',
-      build: {},
-      plugins: [
-        react(),
-        linterPlugin({
-          include: ['./src/**/*.ts', './src/**/*.tsx'],
-          linters: [
-            new EsLinter({
-              configEnv: configEnv,
-              serveOptions: { clearCacheOnStart: true },
-            }),
-            new TypeScriptLinter(),
-          ],
-        }),
-      ],
-      // define: {
+    (configEnv: ConfigEnv): UserConfig | Promise<UserConfig> => {
+        // const env = loadEnv(mode, process.cwd(), '')
+        return {
+            base: '/robot-image-ui/',
+            plugins: [
+                react(),
+                linterPlugin({
+                    include: ['./src/**/*.ts', './src/**/*.tsx'],
+                    linters: [
+                        new EsLinter({
+                            configEnv: configEnv,
+                            serveOptions: { clearCacheOnStart: true },
+                        }),
+                        new TypeScriptLinter(),
+                    ],
+                }),
+            ],
+            // define: {
 
-      //   API_URL: '',
-      // },
-    }
-  },
+            //   API_URL: '',
+            // },
+        }
+    },
 )

@@ -1,15 +1,19 @@
-import { useEffect, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import Results from '../components/results/Results'
-import { SearchBarT } from '../hooks/useSearch'
+import useSearch, { SearchBarT } from '../hooks/useSearch'
+import { ResultContext } from '../context/ResultContext'
+import ResultInfo from '../components/results/ResultInfo'
 
 interface Props {
     SearchBarState: SearchBarT
-    Result: ResultI | null
 }
 
 const ResultContainer = (props: Props): JSX.Element => {
-    const { SearchBarState, Result } = props
+    const { SearchBarState } = props
+    const { Result } = useContext(ResultContext)
     const [CurrentLocation, setCurrentLocation] = useState('center')
+    const [{ isSearchLoading, Input }] = useSearch(SearchBarState)
+
     const { Location } = SearchBarState
 
     useEffect(() => {
@@ -26,7 +30,12 @@ const ResultContainer = (props: Props): JSX.Element => {
 
     return (
         <div className={`result-container ${resultContainerLoc()}`}>
-            <Results SearchBarState={SearchBarState} Result={Result} />
+            {Result && !isSearchLoading ? (
+                <div className='result-info-container'>
+                    <ResultInfo Input={Input} respCount={Result.data.length} />
+                </div>
+            ) : null}
+            <Results Result={Result} SearchBarState={SearchBarState} />
         </div>
     )
 }

@@ -6,11 +6,6 @@ import useSearch, { InitialSearchState } from '../hooks/useSearch'
 import ResultContainer from './ResultContainer'
 import SearchBarContainer from './SearchBarContainer'
 
-// interface Props {
-//     // SearchBarState: SearchBarT
-//     // SearchBarLoc: SearchBarLocT
-// }
-
 const ContentContainer = (): JSX.Element => {
     const { Result, setResult } = useContext(ResultContext)
     const [SearchBarState, Handler] = useSearch(InitialSearchState)
@@ -20,15 +15,11 @@ const ContentContainer = (): JSX.Element => {
             <div className='header-container'>
                 <Header />
             </div>
-
             <Container className='content-grid'>
-                <ResultContainer
-                    SearchBarState={SearchBarState}
-                    Result={Result}
-                />
+                <div style={{ marginTop: '15%', overflow: 'scroll' }}>
+                    <ResultContainer SearchBarState={SearchBarState} />
+                </div>
                 <SearchBarContainer
-                    // Location={Location}
-                    // isSearchLoading={isSearchLoading && isServiceLoading}
                     SearchBarState={SearchBarState}
                     Result={Result}
                     setResult={setResult}

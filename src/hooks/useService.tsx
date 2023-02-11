@@ -64,20 +64,22 @@ const useService = (state: ServiceT): [ServiceT, ServiceI] => {
         try {
             const res = await axios.post<ResponseI>(
                 // * change URL here
-                Constants.LocalTestURL,
+                Constants.LocalURL,
                 request,
             )
             setLoading(false)
             return res.data
         } catch (error) {
-            // return NewServiceError(error)
             if (error) {
-                console.error(JSON.stringify(error))
                 const err = error as ErrorI
                 const axiosErr = error as AxiosError
                 if (axiosErr) {
                     return NewServiceError(axiosErr)
-                } else return NewServiceError(err)
+                } else if (err) {
+                    return NewServiceError(err)
+                } else {
+                    console.error('error: ' + error)
+                }
             }
             setLoading(false)
         }

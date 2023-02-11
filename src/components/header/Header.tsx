@@ -7,7 +7,6 @@ const Header = (): JSX.Element => {
                 <div className='header-item-container'>
                     <span className='header-title'>{AppName}</span>
                 </div>
-
                 <div className='header-item-container__sm'>
                     <span className='header-span__sm'>stuff</span>
                 </div>

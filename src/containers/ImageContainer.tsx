@@ -1,5 +1,4 @@
-import { Container, Image } from 'react-bootstrap'
-import DownloadButton from '../components/buttons/DownloadButton'
+import { Image } from 'react-bootstrap'
 
 interface Props {
     src: string
@@ -9,8 +8,8 @@ export const ImageContainer = (props: Props): JSX.Element => {
     const { src } = props
 
     return (
-        <Container>
-            <DownloadButton src={src} />
+        <>
+            {/* <DownloadButton src={src} /> */}
             <div className='image-item'>
                 <Image
                     className='image-container'
@@ -18,7 +17,7 @@ export const ImageContainer = (props: Props): JSX.Element => {
                     src={src}
                 />
             </div>
-        </Container>
+        </>
     )
 }
 
