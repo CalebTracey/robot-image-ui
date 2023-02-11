@@ -283,7 +283,7 @@ label {
 
     &:active {
         @extend %border-style;
-        background-color: rgba(white, .95);
+        background-color: rgba(white, 0.95);
         border-right: 0;
         border-color: rgba(colors.$contrast-color, 0.15);
         box-shadow: 0 0 0 0.25rem rgba(colors.$contrast-color, 0.5);
@@ -305,14 +305,14 @@ label {
     &:hover {
         @extend %form-button;
         background-color: rgba(colors.$contrast-color, 0.9);
-        border-color: rgba(colors.$contrast-color, .9);
+        border-color: rgba(colors.$contrast-color, 0.9);
         color: rgba(colors.$text-color, 0.9);
     }
 
     &:disabled {
         @extend %form-button;
         background-color: rgba(colors.$contrast-color, 0.2);
-        border-color: rgba(colors.$contrast-color, .2);
+        border-color: rgba(colors.$contrast-color, 0.2);
         color: rgba(colors.$text-color, 0.2);
     }
 

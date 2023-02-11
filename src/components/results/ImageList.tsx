@@ -1,4 +1,4 @@
-import ImageContainer from '../containers/ImageContainer'
+import ImageContainer from '../../containers/ImageContainer'
 
 interface Props {
     images: UrlI[]

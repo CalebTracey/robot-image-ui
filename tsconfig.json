@@ -16,7 +16,7 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
-    "jsx": "react-jsx"
+    "jsx": "react"
   },
   "globals": {
     "React": true,
@@ -30,8 +30,12 @@
     "jsdom": true,
     "JSX": true
   },
-  "files": ["src/vite-env.d.ts"],
-  "include": ["src", "src/**/*.ts*"],
+  "files": [
+    "src/vite-env.d.ts",
+    "node_modules/@types/jest/index.d.ts",
+    "node_modules/@testing-library/react/index/d.ts",
+  ],
+  "include": ["src", "src/**/*.ts*", "__tests__"],
   "exclude": ["target", "dist", "node_modules"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }

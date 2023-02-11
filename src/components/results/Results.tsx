@@ -1,5 +1,5 @@
 import { SearchBarT } from '../../hooks/useSearch'
-import ImageList from '../ImageList'
+import ImageList from './ImageList'
 
 interface Props {
     SearchBarState: SearchBarT

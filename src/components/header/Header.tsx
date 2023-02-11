@@ -1,4 +1,6 @@
-const AppName = 'AI Hub'
+import React from 'react'
+
+export const AppName = 'AI Hub'
 
 const Header = (): JSX.Element => {
     return (

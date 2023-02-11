@@ -2,7 +2,8 @@
   "env": {
     "browser": true,
     "es2021": true,
-    "jest": true
+    "jest": true,
+    "node": true
   },
   "globals": {
     "JSX": "readonly"
@@ -21,7 +22,8 @@
       "jsx": true
     },
     "ecmaVersion": "latest",
-    "sourceType": "module"
+    "sourceType": "module",
+    "project": "./tsconfig.json"
   },
   "plugins": [
     "import",
@@ -43,7 +45,7 @@
     "react/jsx-props-no-spreading": "off",
     "no-unused-vars": "off",
     "@typescript-eslint/no-unused-vars": "warn",
-    "react/jsx-filename-extension": ["warn", { "extensions": [".tsx", ".ts"] }],
+    "react/jsx-filename-extension": ["warn", { "extensions": [".tsx", ".ts", ".js"] }],
     "react-hooks/rules-of-hooks": "error",
     "react-hooks/exhaustive-deps": "warn",
     "no-use-before-define": "off",
@@ -55,7 +57,8 @@
       "ignorePackages",
       {
         "ts": "never",
-        "tsx": "never"
+        "tsx": "never",
+        "js": "never"
       }
     ],
     "@typescript-eslint/explicit-function-return-type": [
