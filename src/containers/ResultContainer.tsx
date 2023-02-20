@@ -8,10 +8,13 @@ interface Props {
     SearchBarState: SearchBarT
 }
 
+const DefaultLocation = 'center'
+
 const ResultContainer = (props: Props): JSX.Element => {
-    const { SearchBarState } = props
     const { Result } = useContext(ResultContext)
-    const [CurrentLocation, setCurrentLocation] = useState('center')
+    const [CurrentLocation, setCurrentLocation] = useState(DefaultLocation)
+
+    const { SearchBarState } = props
     const [{ isSearchLoading, Input }] = useSearch(SearchBarState)
 
     const { Location } = SearchBarState
