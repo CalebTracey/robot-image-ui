@@ -1,6 +1,6 @@
-import {useCallback, useState} from 'react'
+import { useCallback, useState } from 'react'
 import Constants from '../Constants'
-import {ErrorI, ServiceI} from './useService'
+import { ErrorI, ServiceI } from './useService'
 
 const { DefaultSize, DefaultAmount, SearchBarFormId } = Constants
 
@@ -89,10 +89,10 @@ const useSearch = (state: SearchBarT): SearchBarResponseT => {
         if (isErrorI(apiResponse)) {
             const err = apiResponse as ErrorI
             if (err) {
-                console.error('error: ' + err.RootCause + '\n')
+                console.error(`error: ${err.RootCause}\n`)
                 console.error(JSON.stringify(err.ErrorLog))
             } else {
-                console.error('search error: ' + err)
+                console.error(`search error: ${err}`)
             }
         }
         // successful response
@@ -115,7 +115,7 @@ const useSearch = (state: SearchBarT): SearchBarResponseT => {
         const Timer = setTimeout(() => {
             setResponse((prevState) => ({
                 ...prevState,
-                Input: Input,
+                Input,
             }))
         }, 500) // 500ms
 

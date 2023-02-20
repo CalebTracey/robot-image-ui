@@ -1,7 +1,7 @@
 import { Button } from 'react-bootstrap'
-import { GrowSpinner } from '../GrowSpinner'
 import { BsArrowRight } from 'react-icons/bs'
 import { FC } from 'react'
+import { GrowSpinner } from '../GrowSpinner'
 
 interface Props {
     isLoading: boolean

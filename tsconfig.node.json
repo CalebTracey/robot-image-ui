@@ -1,12 +1,10 @@
 {
   "compilerOptions": {
     "jsx": "react",
-    "jsx": "react",
     "composite": true,
     "module": "ESNext",
     "moduleResolution": "Node",
     "allowSyntheticDefaultImports": true
   },
-  "include": ["vite.config.ts",
-     "src", "__tests__"]
+  "include": ["vite.config.ts"]
 }

@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import axios, { AxiosError, isAxiosError } from 'axios'
-import Constants from '../Constants'
 import chalk from 'chalk'
+import Constants from '../Constants'
 
 export type ServiceT = {
     isServiceLoading: boolean
@@ -25,7 +25,7 @@ const NewServiceError = (error: ErrorI | AxiosError): ErrorI => {
     if (isAxiosError(error)) {
         const { code, cause } = error
         return {
-            StatusCode: code ? code : '500',
+            StatusCode: code || '500',
             RootCause: cause ? cause.message : 'Axios error',
             Trace: 'Service: ImageRequest: error',
             ErrorLog: null,
@@ -45,7 +45,7 @@ const useService = (state: ServiceT): [ServiceT, ServiceI] => {
     const [Response, setResponse] = useState<ServiceT>(state)
 
     const setLoading = (loading: boolean): void => {
-        console.log('=== set loading: ' + loading)
+        console.log(`=== set loading: ${loading}`)
         setResponse((prevState) => ({
             ...prevState,
             isServiceLoading: loading,
@@ -57,7 +57,7 @@ const useService = (state: ServiceT): [ServiceT, ServiceI] => {
     ): Promise<ResponseI | ErrorI | null> => {
         console.info(
             chalk.green(
-                '=== Service: Request starting for: ' + JSON.stringify(request),
+                `=== Service: Request starting for: ${JSON.stringify(request)}`,
             ),
         )
         setLoading(true)
@@ -75,11 +75,11 @@ const useService = (state: ServiceT): [ServiceT, ServiceI] => {
                 const axiosErr = error as AxiosError
                 if (axiosErr) {
                     return NewServiceError(axiosErr)
-                } else if (err) {
-                    return NewServiceError(err)
-                } else {
-                    console.error('error: ' + error)
                 }
+                if (err) {
+                    return NewServiceError(err)
+                }
+                console.error(`error: ${error}`)
             }
             setLoading(false)
         }

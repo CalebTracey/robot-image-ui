@@ -1,5 +1,6 @@
 import { Button } from 'react-bootstrap'
 import { BsDownload } from 'react-icons/bs'
+
 interface Props {
     src: string
 }

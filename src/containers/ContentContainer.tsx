@@ -1,4 +1,4 @@
-import { useContext } from 'react'
+import React, { useContext } from 'react'
 import { Container } from 'react-bootstrap'
 import Header from '../components/header/Header'
 import { ResultContext } from '../context/ResultContext'
@@ -7,7 +7,7 @@ import ResultContainer from './ResultContainer'
 import SearchBarContainer from './SearchBarContainer'
 
 const ContentContainer = (): JSX.Element => {
-    const { Result, setResult } = useContext(ResultContext)
+    const { setResult } = useContext(ResultContext)
     const [SearchBarState, Handler] = useSearch(InitialSearchState)
 
     return (
@@ -21,7 +21,6 @@ const ContentContainer = (): JSX.Element => {
                 </div>
                 <SearchBarContainer
                     SearchBarState={SearchBarState}
-                    Result={Result}
                     setResult={setResult}
                     Handler={Handler}
                 />

@@ -1,41 +1,34 @@
 {
-  "compilerOptions": {
-    "typeRoots": ["src", "node_modules/@types"],
-    "types": ["vite/client"],
-    "target": "esnext",
-    "useDefineForClassFields": true,
-    "lib": ["DOM", "DOM.Iterable", "ESNext"],
-    "allowJs": false,
-    "skipLibCheck": true,
-    "esModuleInterop": false,
-    "allowSyntheticDefaultImports": true,
-    "strict": true,
-    "forceConsistentCasingInFileNames": true,
-    "module": "ESNext",
-    "moduleResolution": "Node",
-    "resolveJsonModule": true,
-    "isolatedModules": true,
-    "noEmit": true,
-    "jsx": "react"
-  },
-  "globals": {
-    "React": true,
-    "google": true,
-    "mount": true,
-    "mountWithRouter": true,
-    "shallow": true,
-    "shallowWithRouter": true,
-    "context": true,
-    "expect": true,
-    "jsdom": true,
-    "JSX": true
-  },
-  "files": [
-    "src/vite-env.d.ts",
-    "node_modules/@types/jest/index.d.ts",
-    "node_modules/@testing-library/react/index/d.ts",
-  ],
-  "include": ["src", "src/**/*.ts*", "__tests__"],
-  "exclude": ["target", "dist", "node_modules"],
-  "references": [{ "path": "./tsconfig.node.json" }]
+    "compilerOptions": {
+        "typeRoots": ["src", "node_modules/@types"],
+        "types": ["vite/client"],
+        "target": "esnext",
+        "useDefineForClassFields": true,
+        "lib": ["DOM", "DOM.Iterable", "ESNext"],
+        "allowJs": false,
+        "skipLibCheck": true,
+        "esModuleInterop": false,
+        "allowSyntheticDefaultImports": true,
+        "strict": true,
+        "forceConsistentCasingInFileNames": true,
+        "module": "ESNext",
+        "moduleResolution": "Node",
+        "resolveJsonModule": true,
+        "isolatedModules": true,
+        "noEmit": true,
+        "jsx": "react-jsx"
+    },
+    "files": ["src/vite-env.d.ts", "vite.config.ts", ".eslintrc.cjs"],
+    "include": [
+        "src",
+        "types",
+        "node_modules/@types",
+        "tests",
+        ".eslintrc.cjs",
+        // "jest.setup.js",
+        "setupTests.ts",
+         "node_modules/vite/dist/node/index.d.ts"
+    ],
+    "exclude": ["target", "dist", "node_modules"],
+    "references": [{ "path": "./tsconfig.node.json" }]
 }

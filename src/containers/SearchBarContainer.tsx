@@ -9,7 +9,6 @@ const { DefaultLabel, SearchLabel } = Constants
 interface Props {
     SearchBarState: SearchBarT
     Handler: SearchBarI
-    Result: ResultI | null
     setResult: Dispatch<SetStateAction<ResultI | null>>
 }
 
@@ -21,7 +20,6 @@ const SearchBarContainer = (props: Props): JSX.Element => {
 
     const [isLoading, setIsLoading] = useState(false)
     const [Label, setLabel] = useState(DefaultLabel)
-    // const [isLoading, setIsLoading] = useState(false)
 
     const { onSubmit, onInputChange } = Handler
 
@@ -39,29 +37,13 @@ const SearchBarContainer = (props: Props): JSX.Element => {
         setIsLoading(false)
     }
 
-    // const handleIsLoading = useCallback((loading: boolean) => {
-    //     loading ? setLabel(SearchLabel) : setLabel(DefaultLabel)
-    //     setIsLoading(loading)
-    // }, [])
-
-    // useEffect(() => {
-    //     handleIsLoading(isSearchLoading)
-
-    //     return () => {
-    //         setLabel(DefaultLabel)
-    //         setIsLoading(false)
-    //     }
-    // }, [handleIsLoading, isSearchLoading])
-
     return (
         <div className={`search-container ${Location}`}>
             <SearchBar
                 Label={Label}
                 isLoading={isLoading}
-                // SearchBarState={SearchBarState}
                 HandleSubmit={HandleSubmit}
                 onInputChange={onInputChange}
-                setLabel={setLabel}
             />
         </div>
     )

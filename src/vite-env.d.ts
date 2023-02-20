@@ -1,3 +1,5 @@
+/// <reference types="vite/client" />
+
 declare type ResultT = ResultI | null
 declare type AlertT = { type: 'success' | 'danger'; message: string }
 declare type VoidFn = () => void
