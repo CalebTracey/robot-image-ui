@@ -1,3 +1,5 @@
+import HeaderItem from './HeaderItem'
+
 export const AppName = 'AI Hub'
 
 const Header = (): JSX.Element => {
@@ -7,15 +9,9 @@ const Header = (): JSX.Element => {
                 <div className='header-item-container'>
                     <span className='header-title'>{AppName}</span>
                 </div>
-                <div className='header-item-container__sm'>
-                    <span className='header-span__sm'>stuff</span>
-                </div>
-                <div className='header-item-container__sm'>
-                    <span className='header-span__sm'>and</span>
-                </div>
-                <div className='header-item-container__sm'>
-                    <span className='header-span__sm'>things</span>
-                </div>
+                <HeaderItem text='stuff' />
+                <HeaderItem text='and' />
+                <HeaderItem text='things' />
             </div>
         </header>
     )
