@@ -6,8 +6,8 @@
 // font-family: 'Roboto Condensed', sans-serif;
 // font-family: 'Roboto Slab', serif;
 
-$border-light: 1px solid rgba(white, .25);
-$border-dark: 1px solid rgba(white, .125);
+$border-light: 1px solid rgba(white, 0.25);
+$border-dark: 1px solid rgba(white, 0.125);
 
 %square {
     display: flex;
@@ -112,21 +112,24 @@ label {
 .header-container {
     grid-column: 1 / spread 4;
     border-bottom: $border-dark;
-
 }
 
 .header-item-container {
     border-radius: 10px;
     background-color: colors.$primary-color;
     padding: 0 0.5rem;
-
     &__sm {
+        // margin: 0 auto;
         // padding: 1rem;
     }
 }
 
 .header-span {
     font-size: 1.5rem;
+    &__sm {
+        font-size: 1.5rem;
+        margin: 0 1rem;
+    }
 }
 
 .loading-page {
@@ -175,7 +178,9 @@ label {
     }
 
     &.bottom {
-        // top: 4rem;
+        top: 15%;
+        overflow: scroll;
+        padding: 1rem;
         bottom: 0;
         transform: translateY(0);
     }
@@ -195,6 +200,7 @@ label {
     align-items: center;
     justify-content: center;
     position: relative;
+    //overflow:   scroll;
 }
 
 %content {
@@ -226,10 +232,8 @@ label {
 
 .header-content {
     @extend %header-font;
-    display: grid;
-    grid-gap: 2rem;
+    display: flex;
     padding: 0.5rem;
-    grid-template-columns: repeat(6, 1fr);
 }
 
 .error-fallback {
@@ -240,30 +244,30 @@ label {
 .form-control {
     @extend %border-style;
     @extend %primary-font;
-    background-color: rgba(white, .85);
+    background-color: rgba(white, 0.85);
     border: $border-light;
     border-right: 0;
     transition: background-color 0.5s ease;
 
-   &:focus{
+    &:focus {
         @extend %border-style;
-        background-color: rgba(white, .95);
+        background-color: rgba(white, 0.95);
         border-right: 0;
-        border-color:rgba(colors.$contrast-color, 0.5);
+        border-color: rgba(colors.$contrast-color, 0.5);
         box-shadow: 0 0 0 0.25rem rgba(colors.$contrast-color, 0.5);
     }
 
     &:focus:hover {
         @extend %border-style;
-        background-color: rgba(white, .95);
+        background-color: rgba(white, 0.95);
         border-right: 0;
         border-color: rgba(colors.$contrast-color, 0.5);
         box-shadow: 0 0 0 0.25rem rgba(colors.$contrast-color, 0.5);
-        }
+    }
 
     &:disabled {
         @extend %border-style;
-        background-color: rgba(white, .5);
+        background-color: rgba(white, 0.5);
         border: $border-light;
         color: rgba(colors.$text-color, 0.7);
         border-right: 0;
@@ -271,19 +275,19 @@ label {
 
     &:hover {
         @extend %border-style;
-        background-color: rgba(white, .95);
+        background-color: rgba(white, 0.95);
         border-right: 0;
         border-color: rgba(colors.$contrast-color, 0.15);
         box-shadow: 0 0 0 0.25rem rgba(colors.$contrast-color, 0.25);
     }
 
-    // &:focus:hover {
-    //     @extend %border-style;
-    //     background-color: rgba(white, .95);
-    //     border-right: 0;
-    //     border-color: rgba(colors.$contrast-color, 0.15);
-    //     box-shadow: 0 0 0 0.25rem rgba(colors.$contrast-color, 0.5);
-    // }
+    &:active {
+        @extend %border-style;
+        background-color: rgba(white, 0.95);
+        border-right: 0;
+        border-color: rgba(colors.$contrast-color, 0.15);
+        box-shadow: 0 0 0 0.25rem rgba(colors.$contrast-color, 0.5);
+    }
 }
 
 %form-button {
@@ -295,21 +299,21 @@ label {
     padding: 0 1rem;
 }
 
-.form-button {
+.form-button.btn {
     @extend %form-button;
 
     &:hover {
         @extend %form-button;
-        background-color: colors.$contrast-color;
-        border-color: colors.$contrast-color;
+        background-color: rgba(colors.$contrast-color, 0.9);
+        border-color: rgba(colors.$contrast-color, 0.9);
         color: rgba(colors.$text-color, 0.9);
     }
 
     &:disabled {
         @extend %form-button;
-        background-color: colors.$contrast-color;
-        border-color: colors.$contrast-color;
-        color: colors.$text-color;
+        background-color: rgba(colors.$contrast-color, 0.2);
+        border-color: rgba(colors.$contrast-color, 0.2);
+        color: rgba(colors.$text-color, 0.2);
     }
 
     &:active {
@@ -381,11 +385,11 @@ label {
     @extend %max-size;
     min-width: 0;
     min-height: 0;
-    padding-bottom: 100%;
+    //padding-bottom: 100%;
 }
 
 .results {
-    margin: 1rem;
+    //margin: 1rem;
 }
 
 .result-info-container {

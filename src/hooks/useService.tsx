@@ -1,25 +1,51 @@
 import { useState } from 'react'
-import axios, { isAxiosError } from 'axios'
-import Constants from '../Constants'
+import axios, { AxiosError, isAxiosError } from 'axios'
 import chalk from 'chalk'
+import Constants from '../Constants'
 
 export type ServiceT = {
     isServiceLoading: boolean
 }
 
 export interface ServiceI {
-    ImageRequest: (request: RequestI) => Promise<ResponseI | null>
+    ImageRequest: (request: RequestI) => Promise<ResponseI | ErrorI | null>
+}
+
+export interface ErrorI {
+    StatusCode: string
+    RootCause: string
+    Trace: string
+    ErrorLog: ErrorLogsT | null
+}
+
+// StatusCode: error.code ? error.code : "500",
+//                 RootCause: error.cause ? error.cause.message : "Axios error"
+
+const NewServiceError = (error: ErrorI | AxiosError): ErrorI => {
+    if (isAxiosError(error)) {
+        const { code, cause } = error
+        return {
+            StatusCode: code || '500',
+            RootCause: cause ? cause.message : 'Axios error',
+            Trace: 'Service: ImageRequest: error',
+            ErrorLog: null,
+        }
+    }
+
+    return error
 }
 
 export const InitialServiceState: ServiceT = { isServiceLoading: false }
 
 /**
  ** useService custom hook
+ *  TODO - would be cool to add state that monitors progress for a load bar
  */
 const useService = (state: ServiceT): [ServiceT, ServiceI] => {
     const [Response, setResponse] = useState<ServiceT>(state)
 
     const setLoading = (loading: boolean): void => {
+        console.log(`=== set loading: ${loading}`)
         setResponse((prevState) => ({
             ...prevState,
             isServiceLoading: loading,
@@ -28,33 +54,43 @@ const useService = (state: ServiceT): [ServiceT, ServiceI] => {
 
     const ImageRequest = async (
         request: RequestI,
-    ): Promise<ResponseI | null> => {
-        console.log(
+    ): Promise<ResponseI | ErrorI | null> => {
+        console.info(
             chalk.green(
-                '=== Service: Request starting for: ' + JSON.stringify(request),
+                `=== Service: Request starting for: ${JSON.stringify(request)}`,
             ),
         )
         setLoading(true)
         try {
-            const res = await axios.post<ResponseI>(Constants.DevURL, request)
+            const res = await axios.post<ResponseI>(
+                // * change URL here
+                Constants.LocalURL,
+                request,
+            )
             setLoading(false)
             return res.data
         } catch (error) {
-            if (isAxiosError(error)) {
-                console.error(error.message)
-            } else {
-                console.error(error)
+            if (error) {
+                const err = error as ErrorI
+                const axiosErr = error as AxiosError
+                if (axiosErr) {
+                    return NewServiceError(axiosErr)
+                }
+                if (err) {
+                    return NewServiceError(err)
+                }
+                console.error(`error: ${error}`)
             }
             setLoading(false)
-            return null
         }
+        return null
     }
 
-    const Handler: ServiceI = {
+    const DAO: ServiceI = {
         ImageRequest,
     }
 
-    return [Response, Handler]
+    return [Response, DAO]
 }
 
 export default useService

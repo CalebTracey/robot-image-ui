@@ -1,7 +1,7 @@
 const Constants = {
     Placeholder: 'Two bears fighting aliens with light sabers',
     DefaultSize: '1024x1024',
-    DefaultAmount: 1,
+    DefaultAmount: 3,
     TenSecondsMs: 10000,
     DefaultLabel: 'what would you like to see?',
     SearchLabel: 'searching...',

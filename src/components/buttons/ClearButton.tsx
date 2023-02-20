@@ -1,18 +1,19 @@
 import { Button } from 'react-bootstrap'
 import { BsXCircle } from 'react-icons/bs'
+
 interface Props {
-  clearHandler: () => void
+    clearHandler: () => void
 }
 
 const ClearButton = (props: Props): JSX.Element => {
-  const { clearHandler } = props
-  return (
-    <Button onClick={clearHandler} className='form-button' type='reset'>
-      <span>
-        <BsXCircle />
-      </span>
-    </Button>
-  )
+    const { clearHandler } = props
+    return (
+        <Button onClick={clearHandler} className='form-button' type='reset'>
+            <span>
+                <BsXCircle />
+            </span>
+        </Button>
+    )
 }
 
 export default ClearButton
